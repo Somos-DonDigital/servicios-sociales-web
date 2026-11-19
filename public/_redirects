@@ -1,0 +1,9 @@
+# Netlify / Cloudflare Pages: redirecciones desde las URL antiguas de Wix
+/blog                 /prensa            301
+/blog/*               /prensa            301
+/prensa/hashtags/*    /prensa            301
+/prensa/categories/*  /prensa            301
+/prensa/categoria/*   /prensa            301
+/inicio               /                  301
+/home                 /                  301
+/index                /                  301

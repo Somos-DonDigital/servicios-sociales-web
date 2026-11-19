@@ -1,0 +1,48 @@
+---
+import Page from '../layouts/Page.astro';
+import Aside from '../components/Aside.astro';
+import Icon from '../components/Icon.astro';
+import { sede } from '../data/site';
+const tramites = [
+  { label: 'IMIS · Ingreso mínimo de inserción social', href: sede('SIMIS') },
+  { label: 'Solicitud (BOCCE 4996, 2 de noviembre de 2010)', href: 'https://www.ceuta.es/ceuta/component/jdownloads/finish/346-noviembre/2006-bocce-4996-02-11-2010?Itemid=534' },
+  { label: 'Justificación de ayudas económicas de Servicios Sociales', href: sede('JAESS') },
+];
+---
+<Page
+  seoTitle="IMIS · Ingreso Mínimo de Inserción Social"
+  description="Ingreso Mínimo de Inserción Social (IMIS) en Ceuta: prestación económica periódica para personas sin recursos suficientes. Requisitos y solicitud en la sede electrónica."
+  eyebrow="Programas"
+  title="Ingreso Mínimo de Inserción Social (IMIS)"
+  lead="Prestación periódica de naturaleza económica dirigida a cubrir las necesidades de aquellas personas que carezcan de recursos económicos suficientes para hacer frente a los gastos básicos para la supervivencia."
+  image="83fb97e16d9a4ff5a31278284c428a1e.jpg"
+  imageAlt="Manos sosteniendo una familia de papel"
+  portrait
+  crumbs={[{ label: 'Programas', href: '/sivo' }, { label: 'IMIS' }]}
+>
+  <a slot="hero" class="btn btn--coral" href={sede('SIMIS')} target="_blank" rel="noopener" data-reveal>Solicitar el IMIS <Icon name="external" /></a>
+  <section class="section section--white">
+    <div class="wrap cgrid">
+      <div class="cgrid__main">
+        <section>
+          <h2 class="h-sec" data-split>¿Qué es el IMIS?</h2>
+          <p class="lead" data-reveal>El ingreso mínimo de inserción social es una prestación periódica de naturaleza económica, dirigida a cubrir las necesidades de aquellas personas que carezcan de recursos suficientes para hacer frente a los gastos básicos para la supervivencia, y lleva aparejada una contraprestación.</p>
+          <ul class="feats" data-stagger style="margin-top:2rem">
+            <li class="feat"><span class="feat__ico"><Icon name="coin" /></span><h3>Periódica</h3><p>Prestación económica que se percibe de forma periódica para cubrir los gastos básicos de supervivencia.</p></li>
+            <li class="feat"><span class="feat__ico"><Icon name="hands" /></span><h3>Con contraprestación</h3><p>Lleva aparejada una contraprestación por parte de la persona beneficiaria.</p></li>
+            <li class="feat"><span class="feat__ico"><Icon name="check" /></span><h3>Subsidiaria</h3><p>Tiene carácter subsidiario de todo tipo de recursos y prestaciones sociales de contenido económico que pudieran corresponder al titular o a cualquiera de los miembros de su unidad familiar.</p></li>
+            <li class="feat"><span class="feat__ico"><Icon name="family" /></span><h3>Complementaria</h3><p>En su caso, es complementaria de esos recursos y prestaciones de la unidad familiar.</p></li>
+          </ul>
+        </section>
+        <section>
+          <h2 class="h-sec" data-split>Cómo solicitarlo</h2>
+          <p data-reveal>La solicitud se tramita a través de la sede electrónica de la Ciudad Autónoma de Ceuta, en el trámite «IMIS · Ingreso mínimo de inserción social». También puedes acudir a tu Unidad de Trabajo Social, donde te informarán y te ayudarán con la documentación.</p>
+          <div class="btn-row" data-reveal>
+            <a class="btn" href={sede('SIMIS')} target="_blank" rel="noopener">Ir al trámite en la sede <Icon name="external" /></a>
+          </div>
+        </section>
+      </div>
+      <Aside items={tramites} />
+    </div>
+  </section>
+</Page>

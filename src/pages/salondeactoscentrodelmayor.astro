@@ -1,0 +1,28 @@
+---
+import MayorPage from '../layouts/MayorPage.astro';
+import Gallery from '../components/Gallery.astro';
+const fotos = ['0bb553f56ebd4abfbb6a436a62e4c4c6.jpg', '3f1e8eef57564e6b9b2b13d8d4928e8a.jpg', '5dc3d240e10949d1ae8dfa170cba5a8b.jpg', '3a676718e64840fea252c9ba4ce16030.jpg', '7d7adb68e0b14912896d54cd0cd32601.jpg', 'e9cc316d7a074bebb0a0ccc83402a629.jpg', '5f9e6847a36a4b62b3ea23b81b2b9a80.jpg'];
+---
+<MayorPage
+  seoTitle="Salón de actos del Centro del Mayor"
+  description="Salón de actos del Centro del Mayor de Ceuta: más de 180 plazas, sonido e iluminación profesional y accesibilidad para charlas, conciertos y eventos para mayores."
+  title="Salón de actos del Centro del Mayor"
+  lead="Un amplio y moderno salón de actos, diseñado para acoger una gran variedad de actividades y eventos dirigidos a nuestros mayores y a la comunidad en general."
+  image="ac261c9f59f4460881aede2c9df6f21d.jpg"
+  imageAlt="Salón de actos del Centro del Mayor con público"
+  crumb="Salón de actos"
+>
+  <h2 data-split>Un espacio equipado para la participación</h2>
+  <p class="lead" data-reveal>Con capacidad para más de 180 personas, este espacio está perfectamente equipado para ofrecer comodidad, accesibilidad y tecnología al servicio del bienestar y la participación social.</p>
+  <p data-reveal>El salón dispone de sistema de sonido e iluminación profesional, pantalla de proyección, micrófonos inalámbricos y un escenario versátil, ideal para representaciones teatrales, conferencias, actuaciones musicales, proyecciones de cine y celebraciones institucionales. Todo el recinto está adaptado para personas con movilidad reducida.</p>
+  <h3 data-reveal>Entre los servicios habituales destacan</h3>
+  <ul class="checklist checklist--2" data-stagger>
+    <li>Charlas informativas y talleres formativos</li>
+    <li>Actuaciones culturales y musicales</li>
+    <li>Proyecciones audiovisuales</li>
+    <li>Encuentros y celebraciones de carácter social o institucional</li>
+  </ul>
+  <p class="note" data-reveal>El salón puede solicitarse para actividades promovidas por asociaciones de mayores u organismos públicos, siempre con reserva previa y sujeto a disponibilidad.</p>
+  <p data-reveal style="margin-top:1.4rem">Este espacio es un punto de encuentro clave donde se fomentan la convivencia, la cultura y el envejecimiento activo.</p>
+  <div style="margin-top:2.5rem"><Gallery images={fotos} alt="Salón de actos del Centro del Mayor" title="Galería" /></div>
+</MayorPage>

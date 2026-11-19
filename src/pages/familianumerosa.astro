@@ -1,0 +1,71 @@
+---
+import Page from '../layouts/Page.astro';
+import Aside from '../components/Aside.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../data/site';
+
+const supuestos = [
+  'La integrada por uno o dos ascendientes con tres o más hijos, sean o no comunes, o dos hijos si uno es discapacitado.',
+  'Dos ascendientes, cuando ambos fueran discapacitados o, al menos, uno de ellos tuviera un grado de discapacidad igual o superior al 65 %, con dos hijos, sean o no comunes.',
+  'El padre o la madre separados o divorciados con tres o más hijos, sean o no comunes, aunque estén en distintas unidades familiares, siempre que se encuentren bajo su dependencia económica.',
+  'Dos o más hermanos huérfanos en los supuestos recogidos en la Ley 40/2003, de 18 de noviembre, de Protección a las Familias Numerosas.',
+  'El padre o la madre con dos hijos, cuando haya fallecido el otro progenitor.',
+];
+const condiciones = [
+  'Ser solteros y menores de 21 años de edad, o ser discapacitados, o estar incapacitados para trabajar. Tal límite de edad se ampliará hasta los 26 años cuando cursen estudios adecuados a su edad y titulación o encaminados a la obtención de un puesto de trabajo.',
+  'Convivir con el ascendiente o ascendientes.',
+  'Depender económicamente del ascendiente o ascendientes.',
+];
+const docs = [
+  'Libro de Familia (original).',
+  'DNI/NIE del titular y del cónyuge, si lo hubiese (original).',
+  'En caso de discapacidad, certificado de tal condición.',
+  'Matrícula del curso corriente (mayores de 21 años).',
+  'En caso de renovación, presentar el título caducado.',
+];
+const enlaces = [
+  { label: 'Ley 40/2003, de 18 de noviembre, de Protección a las Familias Numerosas (BOE-A-2003-21052)', href: 'https://www.boe.es/eli/es/l/2003/11/18/40' },
+  { label: 'Real Decreto 1621/2005, Reglamento de la Ley 40/2003 (BOE-A-2006-674)', href: 'https://www.boe.es/eli/es/rd/2005/12/30/1621' },
+  { label: 'Ley 26/2015, de modificación del sistema de protección a la infancia y a la adolescencia (BOE-A-2015-8470)', href: 'https://www.boe.es/buscar/act.php?id=BOE-A-2015-8470' },
+  { label: 'Sede electrónica de la Ciudad Autónoma de Ceuta', href: SITE.sede },
+];
+---
+<Page
+  seoTitle="Título de familia numerosa en Ceuta"
+  description="Cómo obtener o renovar el título de familia numerosa en Ceuta: quién se considera familia numerosa, condiciones de los hijos, documentación y tramitación."
+  eyebrow="Servicios"
+  title="Familias numerosas"
+  lead="Apoyamos a las familias numerosas a través de programas diseñados para mejorar su calidad de vida y facilitar su día a día: beneficios económicos, descuentos en servicios esenciales, bonificaciones fiscales y acceso prioritario a recursos educativos, culturales y sociales."
+  image="8f91b428f686444daeb54d9eb2059add.jpg"
+  imageAlt="Pies de niños sentados en un tronco en el parque"
+  crumbs={[{ label: 'Servicios', href: '/familianumerosa' }, { label: 'Familia numerosa' }]}
+>
+  <section class="section section--white">
+    <div class="wrap cgrid">
+      <div class="cgrid__main">
+        <section>
+          <h2 class="h-sec" data-split>¿Quién se considera familia numerosa?</h2>
+          <ol class="steps" data-stagger>{supuestos.map((s) => <li>{s}</li>)}</ol>
+        </section>
+        <section>
+          <h2 class="h-sec" data-split>Condiciones de los hijos</h2>
+          <p data-reveal>Los hijos deberán:</p>
+          <ul class="checklist" data-stagger>{condiciones.map((s) => <li>{s}</li>)}</ul>
+        </section>
+        <section>
+          <h2 class="h-sec" data-split>Documentación</h2>
+          <p data-reveal>Para acceder a los beneficios para las familias numerosas establecidos por la ley es necesario contar con el título oficial expedido por la comunidad autónoma en la que reside la persona solicitante.</p>
+          <ul class="checklist checklist--2" data-stagger>{docs.map((s) => <li>{s}</li>)}</ul>
+        </section>
+        <section>
+          <h2 class="h-sec" data-split>Tramitación</h2>
+          <ul class="feats" data-stagger>
+            <li class="feat"><span class="feat__ico"><Icon name="pin" /></span><h3>Presencial</h3><p>Registro General de la Ciudad Autónoma de Ceuta.</p></li>
+            <li class="feat"><span class="feat__ico"><Icon name="doc" /></span><h3>Online</h3><p>Sede electrónica de la Ciudad Autónoma de Ceuta (<a href={SITE.sede} target="_blank" rel="noopener">sede.ceuta.es</a>).</p></li>
+          </ul>
+        </section>
+      </div>
+      <Aside title="Enlaces de interés (BOE)" items={enlaces} />
+    </div>
+  </section>
+</Page>

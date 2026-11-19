@@ -1,0 +1,45 @@
+---
+import MayorPage from '../layouts/MayorPage.astro';
+import Icon from '../components/Icon.astro';
+import { sede } from '../data/site';
+const requisitos = [
+  'Ser español y residente en la Ciudad Autónoma de Ceuta y/u ostentar la ciudadanía de la Unión Europea.',
+  'Estar empadronado en la Ciudad Autónoma de Ceuta durante los tres últimos años inmediatamente anteriores a la fecha de la solicitud, o tener parientes por consanguinidad hasta el 3.er grado con residencia efectiva en Ceuta durante al menos 5 años anteriores a la solicitud.',
+  'Tener cumplidos sesenta y cinco años en el momento de solicitar el ingreso.',
+  'Con carácter excepcional, podrán ser beneficiarias las personas menores de 65 años con discapacidad, a excepción de quienes sufran graves trastornos de la conducta, que hayan convivido siempre con sus padres o cuidadores y estos necesiten ingresar en una plaza para personas mayores asistidas, siempre que se considere el recurso más adecuado a sus características.',
+  'No padecer enfermedad infectocontagiosa ni cualquier otra que requiera atención permanente y/o continuada en centro hospitalario o similar.',
+  'No padecer trastornos de conducta que puedan perturbar la convivencia en el centro (a excepción de centros que dispongan de unidades especializadas en atención a personas con trastornos de conducta).',
+  'Manifestar la voluntad de acceder a la plaza y aceptar las condiciones de ingreso en el centro residencial que corresponda.',
+];
+---
+<MayorPage
+  seoTitle="Residencias para personas mayores"
+  description="Plazas en residencias para personas mayores en Ceuta: requisitos, centros públicos y concertados (Ntra. Sra. de África, Gerón, Cruz Blanca) y solicitud online."
+  title="Residencias para personas mayores"
+  lead="Plazas en centros residenciales para personas mayores de 65 años, destinadas a servir de vivienda permanente y lugar de convivencia, con atención integral y servicios continuados de carácter personal, social y sanitario."
+  image="16b665de09ec4841bea799d55b42b2a9.jpg"
+  imageAlt="Hombre mayor acompañado por una profesional sanitaria"
+  crumb="Residencias"
+  solicitud={{ label: 'Solicitar acceso a residencia', href: sede('SDAAR') }}
+>
+  <h2 data-split>Requisitos</h2>
+  <p data-reveal>Podrán adquirir la condición de residentes las personas que reúnan los siguientes requisitos:</p>
+  <ol class="steps" data-stagger>{requisitos.map((r) => <li>{r}</li>)}</ol>
+  <h2 data-split style="margin-top:2.5rem">Centros residenciales</h2>
+  <div class="feats" data-stagger>
+    <div class="feat"><span class="tag">Públicos</span><h3 style="margin-top:0.8rem">Residencia de Mayores Ntra. Sra. de África</h3></div>
+    <div class="feat"><span class="tag">Concertados</span>
+      <ul class="checklist" style="margin:0.9rem 0 0;font-size:var(--fs-small)">
+        <li>Centro de Personas Mayores Gerón Ceuta.</li>
+        <li>Centro de Personas Dependientes y Discapacidad Intelectual HH. Franciscanos de Cruz Blanca. Casa Familiar Ntra. Sra. de los Ángeles.</li>
+      </ul>
+    </div>
+  </div>
+  <h2 data-split style="margin-top:2.5rem">Solicitud y documentación</h2>
+  <p data-reveal>Las solicitudes de plaza de residencia se formalizan en el modelo oficial y pueden presentarse de forma individual o conjunta:</p>
+  <ul class="feats" data-stagger>
+    <li class="feat"><span class="feat__ico"><Icon name="users" /></span><h3>Individuales</h3><p>Las presentadas por la persona interesada en el ingreso.</p></li>
+    <li class="feat"><span class="feat__ico"><Icon name="rings" /></span><h3>Conjuntas</h3><p>Contienen la petición de ingreso de dos personas, en las que ambas reúnen la totalidad de las condiciones exigidas.</p></li>
+  </ul>
+  <a class="btn" style="margin-top:1.6rem" href={sede('SDAAR')} target="_blank" rel="noopener" data-reveal>Solicitud de acceso a residencia <Icon name="external" /></a>
+</MayorPage>

@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+---
+<Base title="Página no encontrada" description="La página que buscas no existe o ha cambiado de dirección." noindex>
+  <section class="section">
+    <div class="wrap wrap--narrow" style="text-align:center">
+      <p class="eyebrow" style="justify-content:center">Error 404</p>
+      <h1>No encontramos esta página</h1>
+      <p class="lead">Puede que haya cambiado de dirección. Te ayudamos a encontrar lo que buscas.</p>
+      <div class="btn-row" style="justify-content:center;margin-top:2rem">
+        <a class="btn" href="/">Ir al inicio <Icon name="arrow" /></a>
+        <a class="btn btn--ghost" href="/solicitudes">Trámites online</a>
+        <a class="btn btn--ghost" href="/prensa">Noticias</a>
+      </div>
+    </div>
+  </section>
+</Base>

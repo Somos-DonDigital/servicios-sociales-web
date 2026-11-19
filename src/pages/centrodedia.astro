@@ -1,0 +1,29 @@
+---
+import MayorPage from '../layouts/MayorPage.astro';
+const requisitos = [
+  'Ser español y residente en la Ciudad Autónoma de Ceuta y/u ostentar la ciudadanía de la Unión Europea.',
+  'Estar empadronado en la Ciudad Autónoma de Ceuta durante los tres últimos años inmediatamente anteriores a la fecha de la solicitud, o tener parientes por consanguinidad hasta el 3.er grado con residencia efectiva en Ceuta durante al menos 5 años anteriores a la solicitud.',
+  'Tener cumplidos sesenta y cinco años en el momento de solicitar el ingreso.',
+  'Personas adultas con dependencia moderada o con algún problema físico o psicosocial que les dificulte cubrir sus necesidades básicas.',
+  'Ausencia, inadecuación o imposibilidad de apoyo sociofamiliar.',
+  'No presentar patrones de comportamiento agresivos o peligrosos.',
+  'No padecer enfermedad infectocontagiosa.',
+  'No consumir de forma adictiva alcohol o cualquier sustancia estupefaciente y/o psicotrópica.',
+  'Buena adherencia al tratamiento médico.',
+];
+---
+<MayorPage
+  seoTitle="Centro de estancia diurno y nocturno"
+  description="Centro de estancia diurno y nocturno para mayores en Ceuta (HH. Franciscanos de Cruz Blanca): atención integral, requisitos de acceso e información."
+  title="Centro de estancia diurno / nocturno"
+  lead="HH. Franciscanos de Cruz Blanca. Destinado a servir de vivienda permanente y lugar de convivencia, prestando una atención integral y servicios continuados de carácter personal, social y sanitario a sus beneficiarios."
+  image="ea3b819d6b784236adad0ca14a989500.jpg"
+  imageAlt="Edificio del centro de estancia diurno y nocturno"
+  crumb="Centro de día / noche"
+  solicitud={null}
+>
+  <h2 data-split>Un lugar de convivencia y apoyo</h2>
+  <p class="lead" data-reveal>Los centros de día son establecimientos abiertos donde se prestan servicios sociales y asistenciales. Se procura la realización de actividades para alcanzar niveles más altos de información, el fomento de la participación personal y comunitaria, el estímulo de acciones de intercambio, la ayuda mutua y, en general, la mejora progresiva de la forma de vida.</p>
+  <h2 data-split style="margin-top:2.5rem">Requisitos</h2>
+  <ol class="steps" data-stagger>{requisitos.map((r) => <li>{r}</li>)}</ol>
+</MayorPage>

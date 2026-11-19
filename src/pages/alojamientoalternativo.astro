@@ -1,0 +1,47 @@
+---
+import Page from '../layouts/Page.astro';
+import Aside from '../components/Aside.astro';
+import Icon from '../components/Icon.astro';
+import { sede } from '../data/site';
+const tramites = [
+  { label: 'Alquiler de vivienda habitual · Servicios Sociales', href: sede('AVH') },
+  { label: 'Reglamento de ayudas al alquiler (BOCCE 6291, 31 de marzo de 2023)', href: 'https://www.ceuta.es/ceuta/component/jdownloads/finish/1903-marzo/21839-bocce-6291-31-03-2023?Itemid=534' },
+];
+const modalidades = [
+  { i: 'home', t: 'Ayudas al alquiler', d: ['Pretenden fomentar la normalización e integración sociofamiliar en situaciones relacionadas con la necesidad de alojamiento por carencia de este o grave deterioro de las circunstancias que rodean el problema.', 'El programa se basa en facilitar ayudas económicas periódicas que subvencionen parte del importe mensual de una vivienda en régimen de alquiler en el ámbito territorial de la Ciudad de Ceuta. Las condiciones de acceso, los requisitos y las obligaciones de las personas beneficiarias se recogen en el reglamento publicado.'] },
+  { i: 'info', t: 'Alojamientos de urgencia', d: ['Prestación que se lleva a cabo tras la demanda y valoración de una situación que requiere una intervención inmediata, con la finalidad de paliar de manera urgente y temporal la ausencia de alojamiento en que cualquier persona se puede encontrar debido a una situación de conflicto en su entorno familiar y/o social.', 'Incluye estancias de alojamiento de urgencia en recursos públicos y privados.'] },
+  { i: 'heart', t: 'Centros de acogida', d: ['Establecimientos residenciales no permanentes destinados a acoger temporalmente y con una atención integral a personas en situación de graves conflictos convivenciales o carentes de un medio familiar adecuado, procurando el tratamiento necesario para la normalización de la convivencia.', 'La Consejería tiene concertadas plazas con una entidad cuya finalidad es el acogimiento temporal de mujeres e hijos en grave dificultad social.'] },
+];
+---
+<Page
+  seoTitle="Alojamiento alternativo y ayudas al alquiler"
+  description="Programa de Alojamiento Alternativo de Servicios Sociales de Ceuta: ayudas al alquiler, alojamientos de urgencia y centros de acogida. Reglamento y solicitud."
+  eyebrow="Programas"
+  title="Programa de alojamiento alternativo"
+  lead="Garantiza, desde la Red Básica de los Servicios Sociales de Atención Primaria, los recursos de apoyo para atender los problemas de alojamiento temporal o permanente que pueda presentar cualquier persona por conflicto en su entorno de convivencia, marginación, emergencia u otras problemáticas propias de los Servicios Sociales."
+  image="91e553298f9f4640910d7decf6bc3c0e.jpg"
+  imageAlt="Casa y familia recortadas en papel sobre fondo azul"
+  portrait
+  crumbs={[{ label: 'Programas', href: '/sivo' }, { label: 'Alojamiento alternativo' }]}
+>
+  <section class="section section--white">
+    <div class="wrap cgrid">
+      <div class="cgrid__main">
+        <section>
+          <h2 class="h-sec" data-split>Un marco estable para la convivencia</h2>
+          <p class="lead" data-reveal>Esta prestación se define como el conjunto de actuaciones encaminadas a conseguir que la persona en situación de necesidad cuente con un marco estable para el desarrollo de la convivencia.</p>
+          <p data-reveal>Se considera un instrumento para desarrollar intervenciones de normalización e integración social en el marco comunitario y en ningún caso puede sustituir a las actuaciones propias de la política social de vivienda, si bien la coordinación con dicho sistema es imprescindible para dar respuestas más globales y reales a las situaciones relacionadas con la necesidad de alojamiento alternativo.</p>
+          <p data-reveal>Para ello, la Consejería presenta una serie de servicios que tienen por objeto atender las necesidades de alojamiento de los colectivos desfavorecidos y garantizar unas condiciones de vida dignas.</p>
+        </section>
+        <section>
+          <span class="kicker" data-reveal>Modalidades</span>
+          <h2 class="h-sec" data-split>Tres formas de ayuda</h2>
+          <ul class="feats" style="grid-template-columns:1fr" data-stagger>
+            {modalidades.map((m) => <li class="feat"><span class="feat__ico"><Icon name={m.i} /></span><h3>{m.t}</h3>{m.d.map((p) => <p>{p}</p>)}</li>)}
+          </ul>
+        </section>
+      </div>
+      <Aside title="Solicitudes de ayudas" items={tramites} />
+    </div>
+  </section>
+</Page>

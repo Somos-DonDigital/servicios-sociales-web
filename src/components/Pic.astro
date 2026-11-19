@@ -1,0 +1,32 @@
+---
+import { Picture } from 'astro:assets';
+import { img } from '../lib/img';
+
+interface Props {
+  src: string;
+  alt: string;
+  sizes?: string;
+  widths?: number[];
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  priority?: boolean;
+  fit?: 'cover' | 'contain';
+}
+const { src, alt, sizes = '(min-width: 1080px) 50vw, 100vw', widths, class: cls, loading, priority, fit } = Astro.props;
+const meta = img(src);
+const w = (widths ?? [480, 960, 1440, 1920]).filter((x) => x <= meta.width);
+if (!w.length) w.push(meta.width);
+---
+<Picture
+  src={meta}
+  alt={alt}
+  sizes={sizes}
+  widths={w}
+  formats={['avif']}
+  fallbackFormat="webp"
+  class={cls}
+  loading={priority ? 'eager' : loading ?? 'lazy'}
+  fetchpriority={priority ? 'high' : undefined}
+  decoding="async"
+  style={fit === 'contain' ? 'object-fit:contain' : undefined}
+/>

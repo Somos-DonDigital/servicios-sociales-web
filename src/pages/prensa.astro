@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import NewsList from '../components/NewsList.astro';
+import { posts } from '../lib/posts';
+const pages = 1 + Math.max(0, Math.ceil((posts.length - 13) / 12));
+---
+<Base
+  title="Noticias"
+  description="Noticias y actualidad de Servicios Sociales de Ceuta: actividades del Centro del Mayor, convenios, programas sociales y novedades de la Consejería."
+>
+  <NewsList items={posts.slice(0, 13)} page={1} pages={pages} />
+</Base>

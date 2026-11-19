@@ -1,0 +1,63 @@
+---
+import Page from '../layouts/Page.astro';
+import Aside from '../components/Aside.astro';
+import Icon from '../components/Icon.astro';
+import { sede } from '../data/site';
+
+const actuaciones = [
+  ['Información', 'Sobre derechos y recursos sociales existentes en el sistema público de Servicios Sociales.'],
+  ['Orientación', 'Actuación que acompaña la información y garantiza no solo disponer de ella, sino la capacidad de utilizarla adecuadamente.'],
+  ['Asesoramiento', 'A los ciudadanos y ciudadanas sobre los recursos sociales más adecuados a sus necesidades. Es un proceso dirigido a la optimización de los recursos, tanto los propios del sujeto como los del medio.'],
+  ['Valoración', 'Implica conocer y analizar cuál es la demanda planteada, recabando para ello toda la información necesaria, tanto del sujeto como de su entorno.'],
+  ['Canalización', 'Cuando proceda, dirigir la demanda a servicios más concretos dentro del propio Centro.'],
+  ['Derivaciones', 'A otros servicios especializados y otros sistemas de protección social.'],
+  ['Gestión de prestaciones', 'Económicas y sociales: realización de trámites administrativos y gestión de documentos con el objetivo de apoyar a las familias.'],
+];
+const tipos = [
+  { i: 'users', t: 'Ayuda económica pública individual', d: 'Destinadas a una sola persona, ya sea dentro de una unidad familiar con más miembros o cuando esta la componga una sola persona: prótesis, gafas graduadas, leche maternizada, medicamentos, ropa de primera necesidad, billetes de barco…' },
+  { i: 'family', t: 'Otras ayudas económicas a familias', d: 'Atienden las carencias de las familias en las cuestiones más básicas para el desarrollo de la vida diaria: pagos de electricidad, alimentos, agua, enseres básicos, mobiliario y equipamiento, electrodomésticos…' },
+  { i: 'info', t: 'Emergencia o urgente necesidad', d: 'Atienden circunstancias especiales por situaciones sobrevenidas graves y en los casos de catástrofe, incendios, inundación y fenómenos similares.' },
+];
+const tramites = [
+  { label: 'Ayudas suministros básicos: luz y agua', href: sede('SASBL') },
+  { label: 'Ayudas alimentación, vestuario y leche maternizada', href: sede('AAYV') },
+  { label: 'Ayuda económica para adquisición de medicamentos', href: sede('AEPAD') },
+  { label: 'Reglamento (BOCCE 4931, 19 de marzo de 2010)', href: 'https://www.ceuta.es/ceuta/component/jdownloads/finish/339-marzo/1929-bocce-4931-19-03-2010?Itemid=0' },
+];
+---
+<Page
+  seoTitle="SIVO · Servicio de Información, Valoración y Orientación"
+  description="SIVO de Servicios Sociales de Ceuta: información, orientación, valoración y gestión de ayudas económicas para alimentación, suministros, medicamentos y emergencias."
+  eyebrow="Programas"
+  title="Servicio de Información, Valoración y Orientación (SIVO)"
+  lead="Desde este servicio se facilitan prestaciones y actuaciones de información, orientación, valoración, asesoramiento y movilización de recursos."
+  image="8e143b26640545cb883386f42f6e2275.jpg"
+  imageAlt="Cadena de figuras de papel unidas sobre fondo azul"
+  portrait
+  crumbs={[{ label: 'Programas', href: '/sivo' }, { label: 'SIVO' }]}
+>
+  <section class="section section--white">
+    <div class="wrap cgrid">
+      <div class="cgrid__main">
+        <section>
+          <h2 class="h-sec" data-split>Igualdad de acceso a los recursos sociales</h2>
+          <p class="lead" data-reveal>Este grupo responde a la necesidad de los ciudadanos de información sobre el acceso a los recursos que pudieran corresponderles para dar respuesta a las necesidades socialmente reconocidas como objeto de protección social, y de recibir el adecuado asesoramiento para canalizar de forma eficaz sus demandas hacia los diversos servicios que la sociedad organiza.</p>
+          <ul class="feats" data-stagger style="margin-top:2rem">
+            {actuaciones.map(([t, d]) => <li class="feat"><h3>{t}</h3><p>{d}</p></li>)}
+          </ul>
+        </section>
+
+        <section>
+          <span class="kicker" data-reveal>Prestaciones</span>
+          <h2 class="h-sec" data-split>Prestaciones económicas</h2>
+          <p data-reveal>Son recursos que los Servicios Sociales gestionan como complemento al resto de prestaciones, para facilitar la atención a las necesidades de subsistencia relacionadas con la alimentación, el alojamiento, los suministros básicos, el vestido, incluso los desplazamientos necesarios y, en general, cualquier otra tendente a procurar los mínimos de subsistencia imprescindibles para alcanzar un nivel de vida digno.</p>
+          <p data-reveal>Se conceden a personas o familias cuya situación no les permite atender las necesidades básicas por sí mismas. Estas ayudas, previsiblemente irrepetibles, se facilitan ante situaciones puntuales y concretas de necesidad, tienen un carácter transitorio y algunas de ellas son de carácter urgente.</p>
+          <ul class="feats" data-stagger style="margin-top:1.6rem">
+            {tipos.map((t) => <li class="feat"><span class="feat__ico"><Icon name={t.i} /></span><h3>{t.t}</h3><p>{t.d}</p></li>)}
+          </ul>
+        </section>
+      </div>
+      <Aside items={tramites} />
+    </div>
+  </section>
+</Page>

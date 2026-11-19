@@ -1,0 +1,61 @@
+---
+import Page from '../layouts/Page.astro';
+import Aside from '../components/Aside.astro';
+import Icon from '../components/Icon.astro';
+import { sede, tel } from '../data/site';
+const funciones = ['Elaboración de las convocatorias.', 'Gestión de solicitudes.', 'Evaluación de las propuestas presentadas, con la revisión de las memorias técnicas que validen el cumplimiento de los objetivos.', 'Selección de los proyectos.', 'Orientación, asesoramiento y apoyo a las entidades.', 'Coordinación con departamentos y participación en otros foros de acción social.'];
+const enlaces = [
+  { label: 'Trámite de solicitud de subvención IRPF 0,7 %', href: sede('CSI0') },
+  { label: 'Convocatoria de subvención IRPF 0,7 %', href: 'https://www.ceuta.es/ceuta/component/content/article/18-paginas/destacados/5405-convocatoria-subvencion-irpf-2024' },
+  { label: 'Trámite de solicitud de subvención nominativa', href: sede('SDSN') },
+  { label: 'Guía de subvenciones nominativas (inicio y justificación)', href: 'https://www.ceuta.es/ceuta/documentos/secciones/gu%C3%ADa-de-subvenciones' },
+  { label: 'Presupuestos de la Ciudad Autónoma de Ceuta 2025 (ZIP)', href: 'https://www.ceuta.es/ceuta/images/documentos/Institucional/Presupuestos/2025/PRESUPUESTO_CAC_2025.zip' },
+];
+---
+<Page
+  seoTitle="Departamento de Subvenciones"
+  description="Subvenciones de Servicios Sociales de Ceuta para entidades sociales: convenios nominativos y convocatoria del 0,7 % del IRPF. Requisitos, trámites y contacto."
+  eyebrow="Entidades sociales"
+  title="Departamento de Subvenciones"
+  lead="Gestión de subvenciones a entidades que realizan proyectos y actividades que promueven el bienestar social, especialmente de colectivos vulnerables o en riesgo de exclusión social, con ámbito de intervención en la Ciudad de Ceuta."
+  image="07d1be0d86694c9c9012ac41429014c3.jpg"
+  imageAlt="Persona organizando documentos en una carpeta"
+  crumbs={[{ label: 'Subvenciones' }]}
+  ctaTitle="¿Representas a una entidad social?"
+  ctaText="El Departamento de Subvenciones te orienta y asesora sobre convocatorias, solicitudes y justificación de proyectos."
+>
+  <section class="section section--white">
+    <div class="wrap cgrid">
+      <div class="cgrid__main">
+        <section>
+          <h2 class="h-sec" data-split>Funciones</h2>
+          <ol class="steps" data-stagger>{funciones.map((f) => <li>{f}</li>)}</ol>
+        </section>
+        <section>
+          <h2 class="h-sec" data-split>Destinatarios y requisitos</h2>
+          <ul class="feats" data-stagger>
+            <li class="feat"><span class="feat__ico"><Icon name="users" /></span><h3>Destinatarios</h3><p>Entidades que atienden a colectivos sociales en situación de vulnerabilidad, en riesgo de exclusión social y/o personas con diversidad funcional.</p></li>
+            <li class="feat"><span class="feat__ico"><Icon name="check" /></span><h3>Requisitos</h3><p>Pueden acceder a las subvenciones que concede la Ciudad Autónoma de Ceuta todas las entidades sociales debidamente registradas y con sede social en la ciudad.</p></li>
+          </ul>
+        </section>
+        <section>
+          <h2 class="h-sec" data-split>Fuentes de financiación</h2>
+          <p data-reveal>Existen dos fuentes de financiación de los proyectos de intervención social que subvenciona la Consejería:</p>
+          <ul class="feats" data-stagger>
+            <li class="feat"><span class="tag">01</span><h3 style="margin-top:0.8rem">Convenios nominativos</h3><p>Contenidos como subvenciones en los presupuestos generales de la Ciudad de Ceuta.</p></li>
+            <li class="feat"><span class="tag">02</span><h3 style="margin-top:0.8rem">Concurrencia competitiva</h3><p>Programa de subvenciones a programas de interés general dirigidos a fines de interés social con cargo a la asignación tributaria del 0,7 % del Impuesto sobre la Renta de las Personas Físicas (IRPF).</p></li>
+          </ul>
+        </section>
+        <section>
+          <h2 class="h-sec" data-split>Acceso al recurso</h2>
+          <p data-reveal>El procedimiento se realiza a través de la sede electrónica de la Ciudad Autónoma de Ceuta, en los trámites «Solicitud Subvención Nominativa» y «Convocatoria Subvención IRPF 0,7».</p>
+          <div class="btn-row" data-reveal>
+            <a class="btn" href={sede('SDSN')} target="_blank" rel="noopener">Subvención nominativa <Icon name="external" /></a>
+            <a class="btn btn--ghost" href={sede('CSI0')} target="_blank" rel="noopener">Subvención IRPF 0,7 % <Icon name="external" /></a>
+          </div>
+        </section>
+      </div>
+      <Aside title="Enlaces de interés" items={enlaces} contact={{ name: 'Departamento de Subvenciones', address: 'Consejería de Sanidad y Servicios Sociales. Calle Santos Vilela, s/n', phones: ['956 50 46 52', '956 50 46 53'], hours: 'Lunes a viernes, de 09:00 a 14:00 h' }} />
+    </div>
+  </section>
+</Page>

@@ -1,0 +1,39 @@
+---
+import Base from './Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../data/site';
+
+interface Crumb { label: string; href?: string }
+interface Props {
+  seoTitle: string;
+  description: string;
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  image?: string;
+  imageAlt?: string;
+  portrait?: boolean;
+  contain?: boolean;
+  crumbs: Crumb[];
+  ctaTitle?: string;
+  ctaText?: string;
+  schema?: Record<string, unknown>[];
+}
+const p = Astro.props;
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/');
+const items = [{ label: 'Inicio', href: '/' }, ...p.crumbs];
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((c, i) => ({
+    '@type': 'ListItem', position: i + 1, name: c.label,
+    item: SITE.url + (c.href ?? path).replace(/^\/$/, '/'),
+  })),
+};
+---
+<Base title={p.seoTitle} description={p.description} image={p.image} schema={[breadcrumb, ...(p.schema ?? [])]} ctaTitle={p.ctaTitle} ctaText={p.ctaText}>
+  <PageHero eyebrow={p.eyebrow} title={p.title} lead={p.lead} image={p.image} imageAlt={p.imageAlt} crumbs={p.crumbs} portrait={p.portrait} contain={p.contain}>
+    <slot name="hero" />
+  </PageHero>
+  <slot />
+</Base>

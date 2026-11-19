@@ -1,0 +1,56 @@
+---
+import Page from '../layouts/Page.astro';
+import Aside from '../components/Aside.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../data/site';
+---
+<Page
+  seoTitle="Tarjeta de estacionamiento para personas con discapacidad"
+  description="Tarjeta de estacionamiento para personas con discapacidad y movilidad reducida en Ceuta: quién puede obtenerla, condiciones de uso y cómo tramitarla."
+  eyebrow="Servicios"
+  title="Tarjetas de estacionamiento para personas con discapacidad"
+  lead="Documento público acreditativo del derecho de las personas que cumplan los requisitos a estacionar los vehículos en que se desplacen lo más cerca posible del lugar de acceso o de destino."
+  image="35ca3a700c0142c7b759161be818aad5.jpg"
+  imageAlt="Plazas de aparcamiento reservadas para personas con discapacidad"
+  crumbs={[{ label: 'Servicios', href: '/familianumerosa' }, { label: 'Tarjetas de discapacidad' }]}
+>
+  <section class="section section--white">
+    <div class="wrap cgrid">
+      <div class="cgrid__main">
+        <section>
+          <h2 class="h-sec" data-split>¿Quién puede obtenerla?</h2>
+          <div class="feat" data-reveal style="margin-bottom:1rem">
+            <span class="feat__ico"><Icon name="users" /></span>
+            <h3>1. Personas con discapacidad reconocida</h3>
+            <p>Personas físicas que tengan reconocida oficialmente la condición de persona con discapacidad, conforme al artículo 4.2 del Texto Refundido de la Ley General de Derechos de las Personas con Discapacidad y de su Inclusión Social (Real Decreto Legislativo 1/2013, de 29 de noviembre), y se encuentren en alguna de estas situaciones:</p>
+            <ul class="checklist" style="margin-top:1rem;font-size:var(--fs-small)">
+              <li>Que presenten movilidad reducida, conforme al Real Decreto 1971/1999, de 23 de diciembre, dictaminada por los equipos multiprofesionales de calificación y reconocimiento del grado de discapacidad.</li>
+              <li>Que muestren en el mejor ojo una agudeza visual igual o inferior al 0,1 con corrección, o un campo visual reducido a 10 grados o menos, dictaminada por los equipos multiprofesionales de calificación y reconocimiento del grado de discapacidad.</li>
+            </ul>
+          </div>
+          <div class="feat" data-reveal>
+            <span class="feat__ico"><Icon name="card" /></span>
+            <h3>2. Titulares de vehículos de transporte colectivo</h3>
+            <p>Personas físicas o jurídicas titulares de vehículos destinados exclusivamente al transporte colectivo de personas con discapacidad que presten servicios sociales de promoción de la autonomía personal y de atención a la dependencia (Ley 39/2006, de 14 de diciembre), así como los servicios sociales a los que se refiere el texto refundido de la Ley General de derechos de las personas con discapacidad y de su inclusión social.</p>
+          </div>
+        </section>
+        <section>
+          <h2 class="h-sec" data-split>Condiciones de uso</h2>
+          <p class="note" data-reveal><Icon name="info" /> La tarjeta expedida a favor de una persona que reúna los requisitos será única, personal e intransferible, y se utilizará únicamente cuando la persona titular conduzca un vehículo o sea transportada en él.</p>
+        </section>
+        <section>
+          <h2 class="h-sec" data-split>Tramitación</h2>
+          <ul class="feats" data-stagger>
+            <li class="feat"><span class="feat__ico"><Icon name="pin" /></span><h3>Presencial</h3><p>Registro General de la Ciudad Autónoma de Ceuta.</p></li>
+            <li class="feat"><span class="feat__ico"><Icon name="doc" /></span><h3>Online</h3><p>Sede electrónica de la Ciudad Autónoma de Ceuta (<a href={SITE.sede} target="_blank" rel="noopener">sede.ceuta.es</a>).</p></li>
+          </ul>
+        </section>
+      </div>
+      <Aside title="Enlaces de interés" items={[
+        { label: 'Tarjeta de estacionamiento de vehículos que transportan personas con discapacidad', href: 'https://www.ceuta.es/ceuta/tarjeta-de-estacionamiento' },
+        { label: 'Normativa (BOCCE 6488, 18 de febrero de 2025)', href: 'https://www.ceuta.es/ceuta/component/jdownloads/finish/1950-febrero/22748-bocce-6488-18-02-2025?Itemid=0' },
+        { label: 'Sede electrónica de la Ciudad Autónoma de Ceuta', href: SITE.sede },
+      ]} />
+    </div>
+  </section>
+</Page>

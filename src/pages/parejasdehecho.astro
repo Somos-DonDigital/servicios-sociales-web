@@ -1,0 +1,44 @@
+---
+import Page from '../layouts/Page.astro';
+import Aside from '../components/Aside.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../data/site';
+const requisitos = [
+  'Otorgar pleno y libre consentimiento para la unión de convivencia no matrimonial.',
+  'Ser mayor de edad o menor emancipado.',
+  'No tener entre sí relación de parentesco por consanguinidad o adopción.',
+  'No encontrarse incapacitado para dar el consentimiento.',
+  'No estar sujeto a vínculo matrimonial.',
+  'No constar inscrito como integrante de una unión de hecho en otro registro.',
+  'Estar empadronado en la Ciudad de Ceuta.',
+];
+---
+<Page
+  seoTitle="Registro de parejas de hecho en Ceuta"
+  description="Inscripción en el Registro de Parejas de Hecho de la Ciudad Autónoma de Ceuta: requisitos, tramitación presencial y en la sede electrónica, y normativa."
+  eyebrow="Servicios"
+  title="Parejas de hecho"
+  lead="Inscripción de las uniones de convivencia no matrimonial en el registro de la Ciudad Autónoma de Ceuta. Consulta los requisitos y la forma de tramitarla."
+  image="897d444c91b14ec983324f67668c6165.jpg"
+  imageAlt="Pareja paseando de la mano al atardecer"
+  crumbs={[{ label: 'Servicios', href: '/familianumerosa' }, { label: 'Parejas de hecho' }]}
+>
+  <section class="section section--white">
+    <div class="wrap cgrid">
+      <div class="cgrid__main">
+        <section>
+          <h2 class="h-sec" data-split>Requisitos</h2>
+          <ul class="checklist" data-stagger>{requisitos.map((r) => <li>{r}</li>)}</ul>
+        </section>
+        <section>
+          <h2 class="h-sec" data-split>Tramitación</h2>
+          <ul class="feats" data-stagger>
+            <li class="feat"><span class="feat__ico"><Icon name="pin" /></span><h3>Presencial</h3><p>Registro General de la Ciudad Autónoma de Ceuta.</p></li>
+            <li class="feat"><span class="feat__ico"><Icon name="doc" /></span><h3>Online</h3><p>Sede electrónica de la Ciudad Autónoma de Ceuta (<a href={SITE.sede} target="_blank" rel="noopener">sede.ceuta.es</a>).</p></li>
+          </ul>
+        </section>
+      </div>
+      <Aside title="Enlace de interés" items={[{ label: 'Normativa del registro (BOCCE 3755, 24 de septiembre de 1998)', href: 'https://www.ceuta.es/ceuta/component/jdownloads/finish/500-septiembre/3535-bocce-3755-24-09-1998?Itemid=534' }, { label: 'Sede electrónica de la Ciudad Autónoma de Ceuta', href: SITE.sede }]} />
+    </div>
+  </section>
+</Page>

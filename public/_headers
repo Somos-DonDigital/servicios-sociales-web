@@ -1,0 +1,11 @@
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Versión de revisión en Cloudflare Pages: que Google no la indexe
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex, nofollow

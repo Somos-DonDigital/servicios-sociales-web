@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.servicios-sociales.es/sitemap-index.xml

@@ -1,0 +1,19 @@
+---
+import Base from '../../../layouts/Base.astro';
+import NewsList from '../../../components/NewsList.astro';
+import { posts } from '../../../lib/posts';
+
+// Página 1: destacada + 12. Siguientes: 12 por página.
+export function getStaticPaths() {
+  const rest = posts.slice(13);
+  const pages = 1 + Math.ceil(rest.length / 12);
+  return Array.from({ length: pages - 1 }, (_, i) => ({
+    params: { page: String(i + 2) },
+    props: { items: rest.slice(i * 12, i * 12 + 12), page: i + 2, pages },
+  }));
+}
+const { items, page, pages } = Astro.props;
+---
+<Base title={`Noticias · página ${page}`} description={`Noticias de Servicios Sociales de Ceuta, página ${page}.`}>
+  <NewsList items={items} page={page} pages={pages} />
+</Base>

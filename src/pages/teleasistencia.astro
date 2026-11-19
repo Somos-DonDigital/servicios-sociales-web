@@ -1,0 +1,38 @@
+---
+import MayorPage from '../layouts/MayorPage.astro';
+import Icon from '../components/Icon.astro';
+import { sede } from '../data/site';
+---
+<MayorPage
+  seoTitle="Teleasistencia domiciliaria"
+  description="Teleasistencia domiciliaria en Ceuta: atención 24 horas los 365 días con solo pulsar un botón para mayores y personas con discapacidad. Requisitos y solicitud."
+  title="Teleasistencia domiciliaria"
+  lead="Un servicio que, a través de la línea telefónica, permite a las personas mayores o con discapacidad, ante situaciones de emergencia y con solo pulsar un botón, contactar en «manos libres» con un equipo profesional las 24 horas del día, los 365 días del año."
+  image="92d7aa4677954f568a6f455e4385703f.jpg"
+  imageAlt="Mujer mayor hablando por teléfono en casa"
+  crumb="Teleasistencia"
+  solicitud={{ label: 'Solicitar teleasistencia', href: sede('SSDTD') }}
+>
+  <ul class="tl-stats" data-stagger>
+    <li><strong><span data-count="24">24</span> h</strong><span>al día</span></li>
+    <li><strong><span data-count="365">365</span></strong><span>días al año</span></li>
+    <li><strong>1</strong><span>botón para pedir ayuda</span></li>
+  </ul>
+  <h2 data-split>Requisitos</h2>
+  <ul class="checklist" data-stagger>
+    <li>Estar comprendido en el campo de aplicación del Sistema de la Seguridad Social, o ser persona beneficiaria de este en virtud de ley o convenio internacional.</li>
+    <li>Ser pensionista de jubilación o de viudedad mayor de 65 años, o tener reconocido un grado de discapacidad igual o superior al 33 %.</li>
+    <li>Contar con residencia legal en la Ciudad de Ceuta.</li>
+  </ul>
+  <p class="note" data-reveal><Icon name="info" /> Tendrán la condición de personas usuarias del servicio el cónyuge y/o familiares hasta el segundo grado de consanguinidad o afinidad que convivan en el mismo domicilio de la persona solicitante y necesiten las prestaciones y atenciones que este proporciona.</p>
+  <h2 data-split style="margin-top:2.5rem">Documentación y solicitud</h2>
+  <p data-reveal>Consulta la documentación necesaria y presenta la solicitud en la sede electrónica.</p>
+  <a class="btn" href={sede('SSDTD')} target="_blank" rel="noopener" data-reveal>Ver trámite en la sede electrónica <Icon name="external" /></a>
+</MayorPage>
+
+<style>
+  .tl-stats { list-style: none; margin: 0 0 2.5rem; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .tl-stats li { background: var(--azul-50); border-radius: var(--radius); padding: 1.4rem; display: grid; gap: 0.2rem; }
+  .tl-stats strong { font: 500 clamp(2rem, 3.4vw, 3.2rem)/1 var(--font-display); color: var(--azul-700); }
+  .tl-stats span { font-size: var(--fs-small); color: var(--tinta-2); }
+</style>

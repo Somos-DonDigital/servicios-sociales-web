@@ -1,0 +1,146 @@
+---
+import Base from '../../layouts/Base.astro';
+import Pic from '../../components/Pic.astro';
+import Icon from '../../components/Icon.astro';
+import Gallery from '../../components/Gallery.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getImage } from 'astro:assets';
+import { posts, type Post, fmtDate, readingTime, FALLBACK_IMAGE, postUrl } from '../../lib/posts';
+import { img } from '../../lib/img';
+import { SITE } from '../../data/site';
+
+export function getStaticPaths() {
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+const { post } = Astro.props as { post: Post };
+const idx = posts.findIndex((p) => p.slug === post.slug);
+const related = posts.filter((p) => p.slug !== post.slug).slice(0, 3);
+const prev = posts[idx + 1];
+const next = posts[idx - 1];
+const url = new URL(postUrl(post), SITE.url).href;
+const heroImg = post.image ?? FALLBACK_IMAGE;
+const ogImg = await getImage({ src: img(heroImg), width: 1200, height: 675, fit: 'cover', format: 'jpg' });
+
+const schema = [
+  {
+    '@context': 'https://schema.org', '@type': 'NewsArticle',
+    headline: post.title, description: post.description, datePublished: post.date, dateModified: post.date,
+    image: [new URL(ogImg.src, SITE.url).href], inLanguage: 'es-ES', mainEntityOfPage: url,
+    author: { '@type': 'Organization', name: 'Servicios Sociales de Ceuta', url: SITE.url },
+    publisher: { '@id': `${SITE.url}/#org` },
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: SITE.url + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Noticias', item: SITE.url + '/prensa' },
+      { '@type': 'ListItem', position: 3, name: post.title, item: url },
+    ],
+  },
+];
+const share = encodeURIComponent(url);
+const shareTxt = encodeURIComponent(post.title);
+---
+<Base title={post.title} description={post.description} image={heroImg} type="article" published={post.date} schema={schema}>
+  <article>
+    <header class="ah">
+      <div class="wrap wrap--narrow">
+        <nav class="crumbs" aria-label="Ruta de navegación">
+          <ol><li><a href="/">Inicio</a></li><li><a href="/prensa">Noticias</a></li><li><span aria-current="page">Noticia</span></li></ol>
+        </nav>
+        <p class="ah__meta" data-reveal>
+          <span><Icon name="calendar" size={18} /> <time datetime={post.date}>{fmtDate(post.date)}</time></span>
+          <span>{readingTime(post)} min de lectura</span>
+        </p>
+        <h1 data-split>{post.title}</h1>
+      </div>
+      <div class="wrap ah__media-wrap">
+        {post.video ? (
+          <div class="yt" data-reveal>
+            <button class="yt__btn" data-yt={post.video} aria-label={`Reproducir vídeo: ${post.title}`}>
+              <img src={`https://i.ytimg.com/vi/${post.video}/maxresdefault.jpg`} alt="" width="1280" height="720" />
+              <span class="yt__play"><Icon name="play" size={34} /></span>
+            </button>
+          </div>
+        ) : post.image && (
+          <div class="ah__media" data-reveal-img>
+            <Pic src={post.image} alt={post.title} priority sizes="(min-width: 1320px) 1200px, 100vw" />
+          </div>
+        )}
+      </div>
+    </header>
+
+    <div class="wrap wrap--narrow abody">
+      <div class="prose">
+        {post.blocks.map((b) => {
+          if (b.t === 'p') return <p data-reveal class={b.bold ? 'is-strong' : ''}>{b.text}</p>;
+          if (b.t === 'h2') return <h2 data-reveal>{b.text}</h2>;
+          if (b.t === 'h3' || b.t === 'h4') return <h3 data-reveal>{b.text}</h3>;
+          if (b.t === 'ul') return <ul data-reveal>{b.items.map((i) => <li>{i}</li>)}</ul>;
+          if (b.t === 'img') return <figure data-reveal-img><Pic src={b.src} alt={post.title} sizes="(min-width: 900px) 860px, 100vw" /></figure>;
+          return null;
+        })}
+      </div>
+      {post.blocks.filter((b) => b.t === 'gallery').map((g) => (
+        <div class="agal"><Gallery images={(g as any).images} alt={post.title} title="Galería de imágenes" /></div>
+      ))}
+
+      <div class="ashare">
+        <span>Compartir</span>
+        <a href={`https://www.facebook.com/sharer/sharer.php?u=${share}`} target="_blank" rel="noopener">Facebook</a>
+        <a href={`https://twitter.com/intent/tweet?url=${share}&text=${shareTxt}`} target="_blank" rel="noopener">X</a>
+        <a href={`https://wa.me/?text=${shareTxt}%20${share}`} target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+
+      <nav class="apn" aria-label="Otras noticias">
+        {prev ? <a class="apn__l" href={postUrl(prev)}><span>Anterior</span>{prev.title}</a> : <span />}
+        {next ? <a class="apn__r" href={postUrl(next)}><span>Siguiente</span>{next.title}</a> : <span />}
+      </nav>
+    </div>
+  </article>
+
+  <section class="section section--azul">
+    <div class="wrap">
+      <h2 data-split>Más noticias</h2>
+      <ul class="grid-3 rel" data-stagger>{related.map((p) => <li><PostCard post={p} /></li>)}</ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ah { padding-top: max(2rem, 3.5vw); }
+  .crumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4em; margin: 0 0 1.6rem; padding: 0; font-size: var(--fs-small); color: var(--gris); }
+  .crumbs li + li::before { content: '/'; margin-right: 0.4em; opacity: 0.5; }
+  .crumbs a { color: var(--gris); text-decoration: none; }
+  .ah__meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: var(--fs-small); font-weight: 600; color: var(--gris); }
+  .ah__meta span { display: inline-flex; align-items: center; gap: 0.4em; }
+  .ah h1 { font-size: clamp(2rem, 3.6vw, 3.6rem); }
+  .ah__media-wrap { max-width: calc(1200px + var(--gutter) * 2); margin-top: max(1.5rem, 2.5vw); }
+  .ah__media { border-radius: calc(var(--radius) * 1.4); overflow: hidden; box-shadow: var(--shadow); max-height: 78vh; }
+  .ah__media { background: var(--azul-50); }
+  .ah__media :global(img) { width: 100%; max-height: 78vh; object-fit: contain; }
+  .yt { aspect-ratio: 16 / 9; border-radius: calc(var(--radius) * 1.4); overflow: hidden; box-shadow: var(--shadow); background: #000; }
+  .yt__btn { position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; cursor: pointer; background: #000; }
+  .yt__btn img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.3s; }
+  .yt__btn:hover img { opacity: 1; }
+  .yt__play { position: absolute; inset: 0; margin: auto; width: 88px; height: 88px; border-radius: 50%; display: grid; place-items: center; background: var(--coral); color: #fff; box-shadow: 0 10px 40px rgba(0,0,0,.35); transition: transform 0.4s var(--ease); }
+  .yt__btn:hover .yt__play { transform: scale(1.08); }
+  .yt :global(iframe) { width: 100%; height: 100%; border: 0; }
+  .abody { padding-block: max(2.5rem, 4.5vw) 0; }
+  .abody .prose { font-size: clamp(1.08rem, 1.25vw, 1.25rem); line-height: 1.75; max-width: none; }
+  .abody .prose > p:first-child { font-size: var(--fs-lead); color: var(--azul-900); }
+  .is-strong { font-weight: 700; color: var(--azul-900); }
+  .agal { margin-top: 3rem; }
+  .agal :global(.gal__t) { font-size: var(--fs-h3); }
+  .ashare { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--linea); }
+  .ashare span { font-weight: 700; margin-right: 0.4rem; }
+  .ashare a { padding: 0.55em 1em; border-radius: 999px; border: 1px solid var(--linea); background: #fff; text-decoration: none; font-weight: 600; font-size: 0.92rem; }
+  .ashare a:hover { border-color: var(--azul-700); }
+  .apn { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 2.5rem; padding-bottom: var(--section); }
+  @media (min-width: 720px) { .apn { grid-template-columns: 1fr 1fr; } }
+  .apn a { display: block; padding: 1.2rem 1.4rem; background: #fff; border-radius: 14px; border: 1px solid var(--linea); text-decoration: none; color: var(--azul-900); font-weight: 600; line-height: 1.35; transition: border-color 0.3s, box-shadow 0.3s; }
+  .apn a:hover { border-color: var(--azul-400); box-shadow: var(--shadow-sm); }
+  .apn span { display: block; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gris); margin-bottom: 0.3rem; }
+  .apn__r { text-align: right; }
+  .rel { list-style: none; margin: 2rem 0 0; padding: 0; }
+</style>

@@ -1,0 +1,36 @@
+---
+import MayorPage from '../layouts/MayorPage.astro';
+import Gallery from '../components/Gallery.astro';
+const talleres = ['Pintura', 'Manualidades', 'Gimnasia de mantenimiento', 'Baile', 'Memoria', 'Informática e iniciación a las nuevas tecnologías', 'Punto y ganchillo', 'Diseño y moda', 'Pilates', 'Gimnasia pasiva'];
+const fotos = ['12c8cb8da9414e0fbac393949a4a0a95.jpg', '8143b7c0e2b04620a7321d0e3f71b03d.jpg', 'b1806f3792cb4e098ab1c8ac646adc6e.jpg', 'fbb1a0fb19d04e3a91c0ff24b1e97f1e.jpg', '5e4b63c25e644b1681cf4e90217a4e27.jpg', 'dc4da088c6424458a5777d20830d4145.jpg', '19a182e1184b41f3b9cc78d3848ad767.webp', 'c9bf3da3194141eda63feb0db7b81d90.webp', 'cd71d20060b74b109f98158cde868c38.webp', '0d54418ff2324f17a89d5f1bc435be69.webp', '2a11a3eb9fc542dba50d5acbc81a5693.webp', 'd85af488038e45d2af83eaed72e189b4.webp', '7e673973d01a481d91c4ff8a98304f6b.webp', 'af62b0c449b343b89c79f316abff9709.webp', '97a3eeb6766b41198c7389c34abe42b8.jpg', 'bdd36ec868724a289fb1d565d5ac1483.jpg', 'd693df1cc660473cb571ac5110ceb890.jpg', '3b0cda46d21f416a948bfe10fd1dec74.jpg'];
+---
+<MayorPage
+  seoTitle="Programa de envejecimiento saludable"
+  description="Programa de envejecimiento saludable del Centro del Mayor de Ceuta: talleres de pintura, baile, memoria, informática, pilates, visitas culturales y actividades de ocio."
+  title="Programa de envejecimiento saludable"
+  lead="Proceso por el que se optimizan las oportunidades de bienestar físico, social y mental durante toda la vida, con el objetivo de ampliar la esperanza de vida saludable y la calidad de vida en la vejez."
+  image="50f547ba8b3e4a25b5b3a3537aa0f401.jpg"
+  imageAlt="Marcha de mayores por las calles de Ceuta"
+  crumb="Envejecimiento saludable"
+  solicitud={null}
+>
+  <h2 data-split>1. Actividades formativas y talleres</h2>
+  <ul class="pills" data-stagger>{talleres.map((t) => <li>{t}</li>)}</ul>
+  <p class="note" data-reveal><strong>Requisitos para acceder al programa:</strong>&nbsp;ser mayor de 65 años y estar jubilado.</p>
+
+  <h2 data-split style="margin-top:2.5rem">2. Actividades culturales y de ocio</h2>
+  <p data-reveal>Visitas culturales, días de parque, conmemoraciones y celebraciones…</p>
+  <h3 data-reveal>Requisitos</h3>
+  <ul class="checklist checklist--2" data-stagger>
+    <li>Ser mayor de 65 años y estar jubilado.</li>
+    <li>Autonomía para viajar.</li>
+    <li>Residir en Ceuta.</li>
+    <li>No superar los ingresos económicos establecidos en la convocatoria.</li>
+  </ul>
+  <div style="margin-top:2.5rem"><Gallery images={fotos} alt="Actividades del programa de envejecimiento saludable" title="Nuestros mayores en acción" /></div>
+</MayorPage>
+
+<style>
+  .pills { list-style: none; margin: 0 0 1.4rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .pills li { padding: 0.6em 1.1em; border-radius: 999px; background: var(--azul-50); border: 1px solid var(--azul-200); color: var(--azul-900); font-weight: 600; font-size: var(--fs-small); }
+</style>

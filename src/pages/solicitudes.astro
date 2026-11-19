@@ -1,0 +1,67 @@
+---
+import Page from '../layouts/Page.astro';
+import Tramites from '../components/Tramites.astro';
+import { sede } from '../data/site';
+const grupos = [
+  { t: 'Ingresos y ayudas económicas', items: [
+    { label: 'IMIS · Ingreso mínimo de inserción social', href: sede('SIMIS') },
+    { label: 'Ayudas suministros básicos: luz y agua', href: sede('SASBL') },
+    { label: 'Ayudas alimentación, vestuario y leche maternizada', href: sede('AAYV') },
+    { label: 'Ayuda económica para adquisición de medicamentos', href: sede('AEPAD') },
+    { label: 'Prestaciones de carácter puntual (gafas, prótesis, electrodomésticos y mobiliario)', href: sede('PPA') },
+    { label: 'Ayuda a enfermos celíacos', href: sede('AAEC') },
+    { label: 'Ayudas a afectados por el conflicto de Ucrania', href: sede('AAAPE') },
+    { label: 'Justificación de ayudas económicas de Servicios Sociales', href: sede('JAESS') },
+  ] },
+  { t: 'Vivienda y energía', items: [
+    { label: 'Alquiler de vivienda habitual · Servicios Sociales', href: sede('AVH') },
+    { label: 'Solicitud de informe para el bono social', href: sede('SDIDB') },
+    { label: 'Renuncia o cambio de datos bancarios de la ayuda del bono social térmico', href: sede('SRCBS') },
+  ] },
+  { t: 'Informes y solicitudes generales', items: [
+    { label: 'Solicitud de informe de arraigo social', href: sede('SIDAS') },
+    { label: 'Informe de ser usuario o no de Servicios Sociales Comunitarios', href: sede('IDSUO') },
+    { label: 'Solicitud genérica al Centro de Servicios Sociales', href: sede('SGAQ') },
+  ] },
+  { t: 'Personas mayores', items: [
+    { label: 'Servicio de Ayuda a Domicilio (SAD)', href: sede('SSAAD') },
+    { label: 'Teleasistencia domiciliaria', href: sede('SSDTD') },
+    { label: 'Acceso a residencia de personas mayores', href: sede('SDAAR') },
+    { label: 'Ayudas técnicas y adaptativas del hogar', href: sede('SATAH') },
+  ] },
+  { t: 'Entidades sociales', items: [
+    { label: 'Convocatoria de subvención IRPF 0,7 %', href: sede('CSI0') },
+    { label: 'Solicitud de subvención nominativa', href: sede('SDSN') },
+  ] },
+];
+---
+<Page
+  seoTitle="Trámites y solicitudes online"
+  description="Todos los trámites de Servicios Sociales de Ceuta en la sede electrónica: IMIS, ayudas de luz, agua y alimentación, alquiler, bono social, arraigo, mayores y subvenciones."
+  eyebrow="Enlaces de interés"
+  title="Ayudas y solicitudes online"
+  lead="Accede directamente a cada trámite de la sede electrónica de la Ciudad Autónoma de Ceuta. Si tienes dudas sobre cuál te corresponde, tu Unidad de Trabajo Social te orienta."
+  crumbs={[{ label: 'Enlaces de interés' }]}
+>
+  <section class="section section--tight" style="padding-top:0">
+    <div class="wrap">
+      <nav class="jump" aria-label="Categorías" data-reveal>
+        {grupos.map((g, i) => <a href={`#g${i}`}>{g.t}</a>)}
+      </nav>
+      {grupos.map((g, i) => (
+        <div class="grp" id={`g${i}`}>
+          <h2 data-split>{g.t}</h2>
+          <Tramites items={g.items} cols={2} />
+        </div>
+      ))}
+    </div>
+  </section>
+</Page>
+
+<style>
+  .jump { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+  .jump a { padding: 0.55em 1em; border-radius: 999px; background: #fff; border: 1px solid var(--linea); text-decoration: none; font-weight: 600; font-size: 0.95rem; color: var(--azul-900); transition: background 0.25s, color 0.25s; }
+  .jump a:hover { background: var(--azul-900); color: #fff; }
+  .grp + .grp { margin-top: max(3rem, 4.5vw); }
+  .grp h2 { font-size: var(--fs-h3); }
+</style>

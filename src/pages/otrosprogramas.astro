@@ -1,0 +1,51 @@
+---
+import Page from '../layouts/Page.astro';
+import Icon from '../components/Icon.astro';
+---
+<Page
+  seoTitle="Otros programas, convenios y transferencias estatales"
+  description="Convenios con el Estado, proyectos cofinanciados (Plan Concertado, pueblo gitano, LOPIVI) y transferencias estatales: pobreza infantil y bono térmico en Ceuta."
+  eyebrow="Programas"
+  title="Programas, convenios y transferencias estatales"
+  lead="La Ciudad Autónoma de Ceuta desarrolla, junto al Ministerio, convenios y proyectos cofinanciados dirigidos a colectivos específicos y a la atención de familias en situación de vulnerabilidad."
+  crumbs={[{ label: 'Programas', href: '/sivo' }, { label: 'Otros programas' }]}
+>
+  <section class="section section--white">
+    <div class="wrap">
+      <div class="op">
+        <div class="op__col" data-reveal>
+          <span class="kicker">01 · Convenios con el Estado</span>
+          <h2>Convenio de asistencia social</h2>
+          <p>El Ministerio suscribe de manera anual un convenio de colaboración con la finalidad de canalizar una subvención nominativa prevista en los Presupuestos Generales del Estado, para el desarrollo en la ciudad de Ceuta de los programas y actuaciones en materia de asistencia social.</p>
+        </div>
+        <div class="op__col" data-reveal>
+          <span class="kicker">02 · Proyectos cofinanciados</span>
+          <h2>Programas para colectivos específicos</h2>
+          <p>La Administración General del Estado y la Ciudad Autónoma de Ceuta suscriben convenios de colaboración para el desarrollo de programas de atención a colectivos específicos. Los créditos concedidos se destinan al cumplimiento de planes y programas conjuntos referidos a las competencias de las comunidades y ciudades autónomas. Entre ellos están:</p>
+          <ul class="checklist" data-stagger>
+            <li>Plan Concertado de Prestaciones Básicas.</li>
+            <li>Proyecto de intervención social integral para la atención, prevención de la marginación e inserción del pueblo gitano.</li>
+            <li>Proyecto LOPIVI: refuerzo de los equipos de atención a la infancia y la familia para la protección integral a la infancia y la adolescencia frente a la violencia.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap">
+      <span class="kicker" data-reveal>03 · Transferencias estatales</span>
+      <h2 data-split>Atención a la familia y prevención de la marginación</h2>
+      <p class="lead" data-reveal style="max-width:62ch">El Ministerio facilita créditos destinados a proyectos de intervención social para la atención a la familia y a colectivos en situación de vulnerabilidad, y para la prevención de la marginación social. En este sentido se desarrollan:</p>
+      <ul class="feats" data-stagger style="margin-top:2rem">
+        <li class="feat"><span class="feat__ico"><Icon name="family" /></span><h3>Programa de protección a la familia y atención a la pobreza infantil</h3><p>Programa con dos ejes: uno destinado a la protección a la familia y otro que garantiza el derecho básico de alimentación, ocio y cultura de niñas, niños y adolescentes durante las vacaciones escolares, y la conciliación de la vida familiar y laboral.</p></li>
+        <li class="feat"><span class="feat__ico"><Icon name="home" /></span><h3>Bono térmico</h3><p>Para paliar la pobreza energética.</p></li>
+      </ul>
+    </div>
+  </section>
+</Page>
+
+<style>
+  .op { display: grid; gap: max(2.5rem, 5vw); grid-template-columns: 1fr; }
+  @media (min-width: 960px) { .op { grid-template-columns: 1fr 1fr; } }
+  .op h2 { font-size: var(--fs-h3); }
+</style>

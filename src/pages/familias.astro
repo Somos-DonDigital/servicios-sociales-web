@@ -1,0 +1,38 @@
+---
+import Page from '../layouts/Page.astro';
+import Aside from '../components/Aside.astro';
+import Icon from '../components/Icon.astro';
+import { sede } from '../data/site';
+const actuaciones = [
+  { i: 'users', t: 'Apoyo social y educativo', d: 'Recurso para las unidades convivenciales que presentan dificultades o carencias de competencias y habilidades sociales para su adecuado desenvolvimiento, pero que no presentan desestructuración. Estas actuaciones son eminentemente preventivas.' },
+  { i: 'family', t: 'Apoyo a la estructura familiar y dinámica relacional', d: 'Intervenciones que se realizan con la finalidad de recomponer unas buenas relaciones en las unidades de convivencia.' },
+  { i: 'hands', t: 'Apoyos de carácter comunitario', d: 'Aquellos que se estime incluir en la intervención social.' },
+];
+---
+<Page
+  seoTitle="Programa de familias (PAFSE)"
+  description="Programa de apoyo a familias en situaciones especiales (PAFSE) de Servicios Sociales de Ceuta: apoyo social, educativo y psicológico a la unidad convivencial."
+  eyebrow="Programas"
+  title="Programa de familias"
+  lead="Programa de apoyo a familias en situaciones especiales (PAFSE), dirigido a dar una cobertura integral a las problemáticas familiares específicas, previniendo que puedan degenerar en situaciones de exclusión social o desintegración familiar."
+  image="d599a429206f4da3854e31584f4cde77.jpg"
+  imageAlt="Familia recortada en papel junto a una casa sobre fondo azul"
+  portrait
+  crumbs={[{ label: 'Programas', href: '/sivo' }, { label: 'Familias' }]}
+>
+  <section class="section section--white">
+    <div class="wrap cgrid">
+      <div class="cgrid__main">
+        <section>
+          <h2 class="h-sec" data-split>Apoyo a la unidad convivencial</h2>
+          <p class="lead" data-reveal>Se realizan prestaciones de apoyo a la unidad convivencial que se concretan en atenciones psicológicas, socioeducativas, técnicas… orientadas a incrementar las competencias sociales y las relaciones de convivencia, incluyendo actuaciones de:</p>
+          <ul class="feats" style="grid-template-columns:1fr;margin-top:1.6rem" data-stagger>
+            {actuaciones.map((a) => <li class="feat"><span class="feat__ico"><Icon name={a.i} /></span><h3>{a.t}</h3><p>{a.d}</p></li>)}
+          </ul>
+          <p class="note" data-reveal style="margin-top:1.6rem"><Icon name="info" /> En general, se realizan intervenciones de prevención, información, orientación, derivación, apoyo económico y coordinación con servicios especializados.</p>
+        </section>
+      </div>
+      <Aside title="Trámites relacionados" items={[{ label: 'Solicitud genérica al Centro de Servicios Sociales', href: sede('SGAQ') }, { label: 'Informe de ser usuario o no de Servicios Sociales Comunitarios', href: sede('IDSUO') }]} />
+    </div>
+  </section>
+</Page>

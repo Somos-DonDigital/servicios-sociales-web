@@ -1,0 +1,67 @@
+---
+import Page from '../layouts/Page.astro';
+import Icon from '../components/Icon.astro';
+
+const objetivos = [
+  'Promover la igualdad, en lo relativo al reconocimiento de los derechos y recursos sociales existentes con la intención de prevenir la marginación social por causa del desconocimiento de estos.',
+  'Evaluación de la demanda del usuario y orientación de esta hacia los recursos propios del sistema o de otros servicios de bienestar.',
+  'Intervenir en la integración de individuos, familias y grupos con dificultades, favoreciendo soluciones de reinserción social en el medio, evitando situaciones de marginación.',
+  'Promocionar los recursos comunitarios, la conciencia de solidaridad a través de la participación en tareas comunes y la constitución de nuevas organizaciones sociales y en el apoyo a las ya existentes.',
+  'Facilitar y favorecer la convivencia comunitaria a través de la atención y prevención de situaciones de marginalidad, promoviendo vías alternativas a la institucionalización y orientadas a la reinserción social.',
+  'Promoción de la convivencia, mediante la prestación de alojamiento temporal o permanente a las personas carentes de hogar o con graves problemas de convivencia a través de las alternativas adecuadas.',
+  'Tratamiento psicosocial para personas en situación de riesgo, marginación o desarraigo social, así como el fomento de mecanismos adecuados para el logro de la integración social.',
+];
+const prestaciones = [
+  { i: 'info', t: 'Información y orientación', h: '/sivo' },
+  { i: 'home', t: 'Apoyo a la unidad convivencial y ayuda a domicilio', h: '/ayudaadomicilio' },
+  { i: 'heart', t: 'Alojamiento alternativo', h: '/alojamientoalternativo' },
+  { i: 'users', t: 'Prevención e inserción social', h: '/inclusionsocial' },
+  { i: 'hands', t: 'Fomento de la solidaridad y cooperación social', h: '/subvenciones' },
+];
+---
+<Page
+  seoTitle="Nuestro compromiso"
+  description="Objetivos y prestaciones básicas del Centro de Servicios Sociales de la Ciudad Autónoma de Ceuta: igualdad, integración, convivencia y atención primaria."
+  eyebrow="Quiénes somos"
+  title="Nuestro compromiso"
+  lead="Primer referente del Sistema Público de Servicios Sociales para hacer operativa la política social de los órganos competentes de la Administración Pública. Planifica, gestiona y evalúa los programas que dan respuesta a las necesidades sociales, y coordina los recursos propios y los de los distintos sistemas de protección social."
+  image="63c68b1cc0854167bd0b0674c9095797.jpg"
+  imageAlt="Manos unidas alrededor del logotipo de Servicios Sociales de Ceuta"
+  crumbs={[{ label: 'Nuestro compromiso' }]}
+>
+  <section class="section section--white">
+    <div class="wrap split split--top">
+      <div>
+        <span class="kicker" data-reveal>El Centro de Servicios Sociales</span>
+        <h2 data-split>La base operativa del sistema público de Servicios Sociales</h2>
+        <p class="lead" data-reveal>El lugar donde se materializa es el Centro de Servicios Sociales, desde el que se desarrollan los objetivos de los Servicios Sociales comunitarios.</p>
+        <p data-reveal>Por todo ello, el Centro de Servicios Sociales se convierte en una organización compleja inmersa en medios sociales dinámicos y cambiantes, y constituye la estructura integrada de recursos de tipo técnico, financiero, humano y material a través de la cual se gestionan los programas y prestaciones que dan cumplimiento a sus objetivos de bienestar social.</p>
+      </div>
+      <ol class="steps" data-stagger>
+        {objetivos.map((o) => <li>{o}</li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <span class="kicker" data-reveal>Atención primaria</span>
+      <h2 data-split>Prestaciones básicas de Servicios Sociales</h2>
+      <p class="lead" data-reveal style="max-width:60ch">Desde el Centro de Servicios Sociales de la Ciudad Autónoma de Ceuta se ponen en marcha todas las prestaciones básicas de Servicios Sociales de Atención Primaria:</p>
+      <ul class="feats feats--3" data-stagger style="margin-top:2rem">
+        {prestaciones.map((p) => (
+          <li><a class="feat" href={p.h} style="display:block;text-decoration:none;color:inherit">
+            <span class="feat__ico"><Icon name={p.i} /></span>
+            <h3>{p.t}</h3>
+            <span class="link-arrow">Más información <Icon name="arrow" /></span>
+          </a></li>
+        ))}
+        <li class="feat" style="background:var(--azul-800);border-color:var(--azul-800);color:#dfe8f6">
+          <span class="feat__ico" style="background:rgba(255,255,255,.12);color:#fff"><Icon name="coin" /></span>
+          <h3 style="color:#fff">Prestaciones complementarias</h3>
+          <p style="color:#c9d8f0">Ayudas económicas destinadas a individuos y/o colectivos a fin de paliar situaciones de necesidad, con la pretensión de normalizar su situación, mejorando su calidad de vida o bien colaborando en la consecución de sus objetivos.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+</Page>

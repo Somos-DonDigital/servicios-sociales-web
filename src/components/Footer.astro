@@ -1,0 +1,73 @@
+---
+import { Image } from 'astro:assets';
+import { NAV, OFFICES, tel, SITE } from '../data/site';
+import { img } from '../lib/img';
+import Icon from './Icon.astro';
+const cons = img('76143b462b5e4362bedd573fc4262f58.png');
+const year = new Date().getFullYear();
+const cols = NAV.filter((n) => n.children);
+---
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__top">
+      <div class="ftr__brand">
+        <Image src={cons} alt="Ciudad Autónoma de Ceuta · Consejería de Sanidad y Servicios Sociales" widths={[320, 640]} sizes="300px" />
+        <p>Primer referente del Sistema Público de Servicios Sociales de la Ciudad Autónoma de Ceuta.</p>
+        <a class="btn btn--light" href={SITE.sede} target="_blank" rel="noopener">Sede electrónica <Icon name="external" /></a>
+      </div>
+      {cols.map((c) => (
+        <div class="ftr__col">
+          <h2 class="ftr__h">{c.label}</h2>
+          <ul>{c.children!.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+        </div>
+      ))}
+      <div class="ftr__col">
+        <h2 class="ftr__h">Más</h2>
+        <ul>
+          <li><a href="/nuestrocompromiso">Nuestro compromiso</a></li>
+          <li><a href="/subvenciones">Subvenciones</a></li>
+          <li><a href="/prensa">Noticias</a></li>
+          <li><a href="/solicitudes">Enlaces de interés</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ftr__offices">
+      {OFFICES.map((o) => (
+        <div class="ftr__office">
+          <h3>{o.name}</h3>
+          <p>{o.address}<br />{o.area}</p>
+          <p class="ftr__phones">{o.phones.map((p) => <a href={tel(p)}>{p}</a>)}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="ftr__bottom">
+      <p>© {year} Consejería de Sanidad y Servicios Sociales · Ciudad Autónoma de Ceuta</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .ftr { background: var(--azul-950); color: #b9c7df; padding-top: calc(var(--section) * 0.5 + max(3.5rem, 5vw)); font-size: var(--fs-small); }
+  .ftr .btn--light { color: var(--azul-900); }
+  .ftr .btn--light:hover { text-decoration: none; }
+  .ftr a { color: #dfe8f6; text-decoration: none; }
+  .ftr a:hover { color: #fff; text-decoration: underline; }
+  .ftr__top { display: grid; gap: 2.5rem; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .ftr__top { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1100px) { .ftr__top { grid-template-columns: 1.6fr 1fr 1fr 1.1fr 0.9fr; } }
+  .ftr__brand :global(img) { width: min(300px, 80%); margin-bottom: 1.4rem; }
+  .ftr__brand p { max-width: 34ch; }
+  .ftr__brand .btn { margin-top: 0.4rem; }
+  .ftr__h { font: 700 0.8rem/1 var(--font-body); letter-spacing: 0.14em; text-transform: uppercase; color: var(--azul-400); margin: 0.4rem 0 1.1rem; }
+  .ftr ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
+  .ftr__offices { display: grid; gap: 1.5rem; grid-template-columns: 1fr; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.1); }
+  @media (min-width: 720px) { .ftr__offices { grid-template-columns: repeat(3, 1fr); } }
+  .ftr__office h3 { font: 700 1rem/1.2 var(--font-body); color: #fff; margin-bottom: 0.4rem; }
+  .ftr__office p { margin: 0 0 0.4rem; }
+  .ftr__phones { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; }
+  .ftr__phones a { font-weight: 700; }
+  .ftr__bottom { margin-top: 3rem; padding: 1.6rem 0 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.86rem; }
+  .ftr__bottom p { margin: 0; }
+</style>

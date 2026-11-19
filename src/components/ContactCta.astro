@@ -1,0 +1,57 @@
+---
+import { OFFICES, tel } from '../data/site';
+import Icon from './Icon.astro';
+interface Props { title?: string; text?: string }
+const {
+  title = '¿Necesitas orientación? Te atendemos cerca de casa',
+  text = 'Acude o llama a la Unidad de Trabajo Social de tu zona. Te informamos, valoramos tu situación y te acompañamos en los trámites.',
+} = Astro.props;
+---
+<section class="cta" aria-labelledby="cta-title">
+  <div class="wrap">
+    <div class="cta__box" data-reveal>
+      <div class="cta__head">
+        <p class="eyebrow">Atención presencial y telefónica</p>
+        <h2 id="cta-title">{title}</h2>
+        <p class="cta__txt">{text}</p>
+        <div class="btn-row">
+          <a class="btn btn--coral" href="/solicitudes">Trámites online <Icon name="arrow" /></a>
+          <a class="btn btn--outline-light" href={tel(OFFICES[2].phones[0])}><Icon name="phone" /> Llámanos al {OFFICES[2].phones[0]}</a>
+        </div>
+      </div>
+      <ul class="cta__list" data-stagger>
+        {OFFICES.map((o) => (
+          <li>
+            <h3>{o.name}</h3>
+            <p class="cta__addr"><Icon name="pin" size={18} /> {o.address} · {o.area}</p>
+            <p class="cta__phones"><Icon name="phone" size={18} /> {o.phones.map((p, i) => <>{i > 0 && ' · '}<a href={tel(p)}>{p}</a></>)}</p>
+            <p class="cta__hours"><Icon name="clock" size={18} /> {o.hours}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta { padding-block: var(--section) 0; margin-bottom: calc(var(--section) * -0.5); position: relative; z-index: 2; }
+  .cta__box {
+    position: relative; overflow: hidden; display: grid; gap: max(2rem, 4vw); grid-template-columns: 1fr;
+    background: var(--azul-800); color: #dfe8f6; border-radius: calc(var(--radius) * 1.6); padding: max(2rem, 5vw);
+  }
+  .cta__box::before {
+    content: ''; position: absolute; width: 60vw; aspect-ratio: 1; right: -25vw; top: -30vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(126,160,214,.35), transparent 65%); pointer-events: none;
+  }
+  @media (min-width: 1000px) { .cta__box { grid-template-columns: 1.05fr 1fr; align-items: center; } }
+  .cta h2 { color: #fff; }
+  .cta .eyebrow { color: var(--azul-200); }
+  .cta__txt { font-size: var(--fs-lead); color: #c9d8f0; margin-bottom: 1.8rem; }
+  .cta__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; position: relative; }
+  .cta__list li { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 1.1rem 1.3rem; }
+  .cta__list h3 { font: 700 1.1rem/1.2 var(--font-body); color: #fff; margin: 0 0 0.5rem; }
+  .cta__list p { display: flex; gap: 0.55em; align-items: flex-start; margin: 0.25rem 0 0; font-size: var(--fs-small); }
+  .cta__list p :global(svg) { flex: none; margin-top: 0.2em; color: var(--azul-400); }
+  .cta__list a { color: #fff; font-weight: 700; text-decoration: none; white-space: nowrap; }
+  .cta__list a:hover { text-decoration: underline; }
+</style>

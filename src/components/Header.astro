@@ -1,0 +1,162 @@
+---
+import { Image } from 'astro:assets';
+import { NAV, OFFICES, tel, SITE } from '../data/site';
+import { img } from '../lib/img';
+import Icon from './Icon.astro';
+
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/').replace(/\/$/, '') || '/';
+const isActive = (href: string, children?: { href: string }[]) =>
+  href === path || (children ?? []).some((c) => c.href === path);
+const logo = img('bd108c049a6a43688b30172abf3387aa.png');
+---
+<div class="topbar">
+  <div class="wrap topbar__in">
+    <p class="topbar__txt"><Icon name="clock" size={16} /> Atención de lunes a viernes · UTS Centro 08:00–14:00 · San José y Príncipe 09:00–14:00</p>
+    <div class="topbar__links">
+      <a href={tel(OFFICES[2].phones[0])}><Icon name="phone" size={16} /> {OFFICES[2].phones[0]}</a>
+      <a href={SITE.sede} target="_blank" rel="noopener">Sede electrónica <Icon name="external" size={14} /></a>
+    </div>
+  </div>
+</div>
+
+<header class="hdr" data-header>
+  <div class="wrap hdr__in">
+    <a class="hdr__logo" href="/" aria-label="Servicios Sociales · Ciudad Autónoma de Ceuta — Inicio">
+      <Image src={logo} alt="" widths={[240, 480]} sizes="220px" loading="eager" fetchpriority="high" />
+    </a>
+
+    <nav class="nav" aria-label="Principal">
+      <ul class="nav__list">
+        {NAV.slice(1).map((item) => (
+          <li class={`nav__item ${item.children ? 'has-sub' : ''}`}>
+            {item.children ? (
+              <>
+                <button class={`nav__link ${isActive(item.href, item.children) ? 'is-active' : ''}`} aria-expanded="false" data-sub-toggle>
+                  {item.label} <Icon name="chevron" size={16} />
+                </button>
+                <div class="sub">
+                  <ul>
+                    {item.children.map((c) => (
+                      <li><a href={c.href} aria-current={c.href === path ? 'page' : undefined}>{c.label}</a></li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            ) : (
+              <a class={`nav__link ${isActive(item.href) ? 'is-active' : ''}`} href={item.href} aria-current={item.href === path ? 'page' : undefined}>{item.label}</a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a class="btn btn--coral hdr__cta" href="/solicitudes">Trámites online <Icon name="arrow" /></a>
+
+    <button class="burger" aria-expanded="false" aria-controls="mnav" data-burger>
+      <span class="sr-only">Abrir menú</span>
+      <span class="burger__l"></span><span class="burger__l"></span>
+    </button>
+  </div>
+</header>
+
+<div class="mnav" id="mnav" hidden data-mnav>
+  <div class="mnav__in wrap">
+    <nav aria-label="Menú móvil">
+      <ul class="mnav__list">
+        {NAV.map((item) => (
+          <li class="mnav__item" data-mnav-item>
+            {item.children ? (
+              <details>
+                <summary>{item.label}<Icon name="chevron" /></summary>
+                <ul>
+                  {item.children.map((c) => <li><a href={c.href}>{c.label}</a></li>)}
+                </ul>
+              </details>
+            ) : (
+              <a href={item.href}>{item.label}</a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <div class="mnav__foot" data-mnav-item>
+      <a class="btn btn--coral" href="/solicitudes">Trámites online <Icon name="arrow" /></a>
+      <a class="btn btn--outline-light" href={tel(OFFICES[2].phones[0])}><Icon name="phone" /> {OFFICES[2].phones[0]}</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .topbar { background: var(--azul-900); color: #c9d8f0; font-size: 0.86rem; }
+  .topbar__in { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 40px; }
+  .topbar__txt { margin: 0; display: flex; align-items: center; gap: 0.5em; }
+  .topbar__links { display: flex; gap: 1.4rem; }
+  .topbar a { color: #fff; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4em; font-weight: 600; }
+  .topbar a:hover { color: var(--azul-200); }
+  @media (max-width: 900px) { .topbar__txt { display: none; } .topbar__in { justify-content: center; } }
+
+  .hdr {
+    position: sticky; top: 0; z-index: 50; background: rgba(251, 248, 243, 0.86);
+    backdrop-filter: saturate(1.4) blur(14px); -webkit-backdrop-filter: saturate(1.4) blur(14px);
+    border-bottom: 1px solid transparent; transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .hdr.is-scrolled { border-color: var(--linea); box-shadow: 0 8px 30px -18px rgba(13,27,54,.35); }
+  .hdr__in { display: flex; align-items: center; gap: 1.5rem; height: var(--header-h); transition: height 0.35s var(--ease); }
+  .hdr.is-scrolled .hdr__in { height: 70px; }
+  .hdr__logo { flex: none; display: block; }
+  .hdr__logo :global(img) { width: clamp(150px, 13vw, 200px); height: auto; }
+
+  .nav { margin-left: auto; }
+  .nav__list { display: flex; list-style: none; margin: 0; padding: 0; gap: 0.15rem; }
+  .nav__item { position: relative; }
+  .nav__link {
+    display: inline-flex; align-items: center; gap: 0.25em; padding: 0.6em 0.75em; border-radius: 999px;
+    font: 600 clamp(0.88rem, 0.98vw, 1rem)/1 var(--font-body); color: var(--tinta); text-decoration: none;
+    background: none; border: 0; cursor: pointer; white-space: nowrap; transition: background 0.25s, color 0.25s;
+  }
+  .nav__link :global(svg) { transition: transform 0.3s var(--ease); }
+  .nav__link:hover, .nav__item:focus-within > .nav__link { background: var(--azul-100); color: var(--azul-900); }
+  .nav__link.is-active { color: var(--azul-700); }
+  .nav__link.is-active::after { content: ''; position: absolute; left: 50%; bottom: 2px; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: var(--coral); }
+  .sub {
+    position: absolute; top: calc(100% + 6px); left: 50%; min-width: 260px; padding: 0.6rem;
+    background: #fff; border-radius: 16px; box-shadow: var(--shadow); border: 1px solid var(--linea);
+    opacity: 0; visibility: hidden; transform: translate(-50%, 8px); transition: opacity 0.25s, transform 0.3s var(--ease), visibility 0.25s;
+  }
+  .sub::before { content: ''; position: absolute; inset: -10px 0 auto; height: 10px; }
+  .sub ul { list-style: none; margin: 0; padding: 0; }
+  .sub a { display: block; padding: 0.6em 0.9em; border-radius: 10px; color: var(--tinta); text-decoration: none; font-weight: 500; font-size: 0.98rem; }
+  .sub a:hover, .sub a[aria-current='page'] { background: var(--azul-50); color: var(--azul-700); }
+  .has-sub:hover .sub, .has-sub:focus-within .sub, .has-sub.is-open .sub { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+  .has-sub:hover .nav__link :global(svg), .has-sub.is-open .nav__link :global(svg) { transform: rotate(180deg); }
+  .hdr__cta { flex: none; min-height: 46px; }
+
+  .burger { display: none; margin-left: auto; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--azul-900); cursor: pointer; position: relative; z-index: 70; }
+  .burger__l { position: absolute; left: 14px; right: 14px; height: 2px; background: #fff; border-radius: 2px; transition: transform 0.4s var(--ease), top 0.4s var(--ease); }
+  .burger__l:nth-of-type(2) { top: 20px; } .burger__l:nth-of-type(3) { top: 27px; }
+  .burger[aria-expanded='true'] .burger__l:nth-of-type(2) { top: 23.5px; transform: rotate(45deg); }
+  .burger[aria-expanded='true'] .burger__l:nth-of-type(3) { top: 23.5px; transform: rotate(-45deg); }
+
+  @media (max-width: 1240px) { .hdr__cta { display: none; } }
+  @media (max-width: 1080px) { .nav { display: none; } .burger { display: block; } }
+
+  .mnav { position: fixed; inset: 0; z-index: 60; background: var(--azul-900); color: #fff; overflow-y: auto; padding-top: calc(var(--header-h) + 40px); }
+  .mnav[hidden] { display: none; }
+  .mnav__list { list-style: none; margin: 0; padding: 0; }
+  .mnav__item { border-bottom: 1px solid rgba(255,255,255,0.12); }
+  .mnav__item > a, .mnav summary {
+    display: flex; justify-content: space-between; align-items: center; padding: 1rem 0;
+    font: 500 clamp(1.5rem, 5vw, 2rem)/1.1 var(--font-display); color: #fff; text-decoration: none; cursor: pointer; list-style: none;
+  }
+  .mnav summary::-webkit-details-marker { display: none; }
+  .mnav details[open] summary :global(svg) { transform: rotate(180deg); }
+  .mnav summary :global(svg) { transition: transform 0.3s var(--ease); }
+  .mnav details ul { list-style: none; margin: 0 0 1rem; padding: 0 0 0 0.25rem; }
+  .mnav details a { display: block; padding: 0.55rem 0; color: var(--azul-200); text-decoration: none; font-size: 1.12rem; }
+  .mnav details a:hover { color: #fff; }
+  .mnav__foot { display: flex; flex-wrap: wrap; gap: 0.8rem; padding: 2rem 0 3rem; border: 0 !important; }
+  :global(body.menu-open) .hdr { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; z-index: 80; box-shadow: none; border-color: transparent; }
+  :global(body.menu-open) .hdr__logo { filter: brightness(0) invert(1); }
+  :global(body.menu-open) { overflow: hidden; }
+  .hdr__logo { position: relative; z-index: 70; transition: filter 0.3s; }
+</style>

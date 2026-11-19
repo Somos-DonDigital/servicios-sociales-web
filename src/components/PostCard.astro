@@ -1,0 +1,52 @@
+---
+import Pic from './Pic.astro';
+import Icon from './Icon.astro';
+import { type Post, postUrl, fmtDate, FALLBACK_IMAGE } from '../lib/posts';
+interface Props { post: Post; featured?: boolean; headingLevel?: 'h2' | 'h3' }
+const { post, featured, headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+const image = post.image ?? FALLBACK_IMAGE;
+---
+<article class={`pc ${featured ? 'pc--feat' : ''}`}>
+  <a class="pc__link" href={postUrl(post)}>
+    <div class={`pc__media ${post.image ? '' : 'is-fallback'}`}>
+      {post.video && !post.image ? (
+        <img src={`https://i.ytimg.com/vi/${post.video}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" />
+      ) : (
+        <Pic src={image} alt="" sizes={featured ? '(min-width: 1080px) 60vw, 100vw' : '(min-width: 1080px) 30vw, (min-width: 768px) 50vw, 100vw'} widths={[480, 768, 1080]} />
+      )}
+      {post.video && <span class="pc__play"><Icon name="play" /></span>}
+    </div>
+    <div class="pc__body">
+      <p class="pc__date"><Icon name="calendar" size={16} /> <time datetime={post.date}>{fmtDate(post.date)}</time></p>
+      <H class="pc__title">{post.title}</H>
+      {featured && <p class="pc__desc">{post.description}</p>}
+      <span class="pc__more">Leer noticia <Icon name="arrow" /></span>
+    </div>
+  </a>
+</article>
+
+<style>
+  .pc { height: 100%; }
+  .pc__link { display: flex; flex-direction: column; height: 100%; background: #fff; border-radius: var(--radius); overflow: hidden; text-decoration: none; color: var(--tinta); border: 1px solid var(--linea); transition: box-shadow 0.4s, transform 0.4s var(--ease); }
+  .pc__link:hover { box-shadow: var(--shadow); transform: translateY(-4px); color: var(--tinta); }
+  .pc__media { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--azul-100); }
+  .pc__media :global(picture), .pc__media :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+  .pc__media.is-fallback { background: #fff; }
+  .pc__media.is-fallback :global(img) { object-fit: contain; padding: 12%; }
+  .pc__link:hover .pc__media :global(img) { transform: scale(1.05); }
+  .pc__play { position: absolute; inset: 0; margin: auto; width: 64px; height: 64px; border-radius: 50%; background: var(--coral); color: #fff; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+  .pc__body { display: flex; flex-direction: column; gap: 0.6rem; padding: 1.4rem 1.5rem 1.6rem; flex: 1; }
+  .pc__date { display: flex; align-items: center; gap: 0.45em; margin: 0; font-size: 0.88rem; font-weight: 600; color: var(--gris); }
+  .pc__title { font-size: clamp(1.15rem, 1.35vw, 1.4rem); line-height: 1.25; margin: 0; }
+  .pc__desc { margin: 0; color: var(--tinta-2); }
+  .pc__more { margin-top: auto; padding-top: 0.6rem; display: inline-flex; align-items: center; gap: 0.45em; font-weight: 700; font-size: 0.95rem; color: var(--azul-700); }
+  .pc__more :global(svg) { transition: transform 0.3s var(--ease); }
+  .pc__link:hover .pc__more :global(svg) { transform: translateX(4px); }
+  @media (min-width: 1080px) {
+    .pc--feat .pc__link { flex-direction: row; }
+    .pc--feat .pc__media { aspect-ratio: auto; flex: 1.25; min-height: 420px; }
+    .pc--feat .pc__body { flex: 1; padding: 2.4rem; justify-content: center; }
+    .pc--feat .pc__title { font-size: var(--fs-h3); }
+  }
+</style>

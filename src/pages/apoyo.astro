@@ -1,0 +1,34 @@
+---
+import MayorPage from '../layouts/MayorPage.astro';
+import Icon from '../components/Icon.astro';
+import { sede } from '../data/site';
+---
+<MayorPage
+  seoTitle="Ayudas técnicas y de apoyo para mayores"
+  description="Ayudas técnicas y adaptación del hogar para mayores de 60 años con discapacidad o dependencia en Ceuta: órtesis, prótesis, préstamo de ayudas y obras de accesibilidad."
+  title="Ayudas técnicas y de apoyo"
+  lead="Subvenciones destinadas a facilitar prestaciones a personas mayores para la rehabilitación y la asistencia personal y del hogar."
+  image="6a39f363aa7a413589c7a29ea9f7c5d4.jpg"
+  imageAlt="Persona mayor caminando con andador por casa"
+  crumb="Ayudas técnicas"
+  solicitud={{ label: 'Solicitar ayudas técnicas', href: sede('SATAH') }}
+>
+  <h2 data-split>Requisitos</h2>
+  <ul class="checklist" data-stagger>
+    <li>Ser persona mayor de 60 años, con discapacidad igual o mayor del 33 % y/o dependiente, que tenga limitadas sus capacidades funcionales.</li>
+    <li>Que los ingresos de la unidad familiar sean inferiores al IPREM por persona, siempre que no superen un máximo de 2,5 veces el IPREM por unidad familiar.</li>
+    <li>Justificar la necesidad por la que se solicita la prestación.</li>
+  </ul>
+  <h2 data-split style="margin-top:2.5rem">Prestaciones</h2>
+  <ul class="feats" data-stagger>
+    <li class="feat"><span class="feat__ico"><Icon name="hands" /></span><h3>1. Ayudas técnicas</h3><p>Para personas mayores, personas con discapacidad y/o dependientes:</p>
+      <ul class="checklist" style="margin:0.8rem 0 0;font-size:var(--fs-small)">
+        <li>Órtesis y prótesis. Productos de apoyo para la autonomía personal.</li>
+        <li>Servicio de préstamo de ayudas técnicas.</li>
+        <li>Recuperación de ayudas técnicas (bastones, andadores, sillas de ruedas, etc.) para un nuevo uso por otras personas usuarias.</li>
+      </ul>
+    </li>
+    <li class="feat"><span class="feat__ico"><Icon name="home" /></span><h3>2. Ayudas adaptativas del hogar</h3><p>Adecuación funcional: obras para la accesibilidad y adaptaciones de la vivienda.</p></li>
+  </ul>
+  <a class="btn" style="margin-top:1.6rem" href={sede('SATAH')} target="_blank" rel="noopener" data-reveal>Solicitud de ayudas técnicas y adaptativas del hogar <Icon name="external" /></a>
+</MayorPage>

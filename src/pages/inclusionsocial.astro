@@ -1,0 +1,58 @@
+---
+import Page from '../layouts/Page.astro';
+import Icon from '../components/Icon.astro';
+---
+<Page
+  seoTitle="Inclusión social · Príncipe Alfonso y Benzú"
+  description="Programa de inclusión e inserción social de Servicios Sociales de Ceuta en Príncipe Alfonso y Benzú: alfabetización, refuerzo escolar y animación sociocultural."
+  eyebrow="Programas"
+  title="Inclusión social"
+  lead="Nuestro programa de inserción social y sociocultural ofrece una amplia variedad de actividades formativas y socioculturales para fomentar el aprendizaje, la creatividad y la integración comunitaria."
+  image="4f67bac3f6f74c6295bb9e71c14b71e5.jpg"
+  imageAlt="Dos manos de distintas personas que se unen"
+  crumbs={[{ label: 'Programas', href: '/sivo' }, { label: 'Inclusión social' }]}
+>
+  <section class="section section--white">
+    <div class="wrap">
+      <span class="kicker" data-reveal>Inserción social y sociocultural</span>
+      <h2 data-split>Actividades en Príncipe Alfonso y Benzú</h2>
+      <div class="inc" data-stagger>
+        <article class="feat">
+          <span class="feat__ico"><Icon name="users" /></span>
+          <h3>Programa de inclusión social: barriada Príncipe Alfonso</h3>
+          <ul class="checklist">
+            <li>Talleres de alfabetización para adultos</li>
+            <li>Refuerzo escolar para niños y niñas</li>
+            <li>Talleres de actividades de animación</li>
+          </ul>
+        </article>
+        <article class="feat">
+          <span class="feat__ico"><Icon name="doc" /></span>
+          <h3>Programa de inserción social: Príncipe Alfonso y Benzú</h3>
+          <h4>Área formativa</h4>
+          <ul class="checklist"><li>Talleres de alfabetización</li></ul>
+          <h4>Animación sociocultural para adultos</h4>
+          <ul class="checklist"><li>Taller de pintura</li><li>Taller de punto de cruz y tricot</li></ul>
+        </article>
+        <article class="feat">
+          <span class="feat__ico"><Icon name="family" /></span>
+          <h3>Animación sociocultural infantil</h3>
+          <ul class="checklist">
+            <li>Lectura comprensiva: lectura de cuentos</li>
+            <li>Juego y movimiento</li>
+            <li>Manualidades</li>
+            <li>Teatro y música</li>
+            <li>Educación en valores</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+</Page>
+
+<style>
+  .inc { display: grid; gap: var(--gap); grid-template-columns: 1fr; margin-top: 2rem; }
+  @media (min-width: 900px) { .inc { grid-template-columns: repeat(3, 1fr); } }
+  .inc h4 { margin: 1.2rem 0 0.6rem; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--azul-700); }
+  .inc .checklist { margin: 0.8rem 0 0; font-size: var(--fs-small); }
+</style>

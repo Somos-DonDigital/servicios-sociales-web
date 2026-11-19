@@ -1,0 +1,74 @@
+---
+import Page from '../layouts/Page.astro';
+import Pic from '../components/Pic.astro';
+import Icon from '../components/Icon.astro';
+import { MAYOR, MAYOR_SERVICES } from '../data/mayor';
+import { tel, SITE } from '../data/site';
+const schema = [{
+  '@context': 'https://schema.org', '@type': 'GovernmentOffice', name: 'Centro del Mayor de Ceuta',
+  parentOrganization: { '@id': `${SITE.url}/#org` },
+  address: { '@type': 'PostalAddress', streetAddress: MAYOR.address, addressLocality: 'Ceuta', addressCountry: 'ES' },
+  telephone: MAYOR.phones.map((p) => '+34 ' + p),
+  openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '14:00' }],
+  url: `${SITE.url}/centrodelmayor`,
+}];
+---
+<Page
+  seoTitle="Centro del Mayor de Ceuta"
+  description="Centro del Mayor de Ceuta: ayuda a domicilio, teleasistencia, residencias, centros de día, envejecimiento saludable, ayudas técnicas y salón de actos. Calle General Aranda, 2."
+  eyebrow="Personas mayores"
+  title="Centro del Mayor"
+  lead="El Centro del Mayor de Ceuta, dependiente de la Consejería de Sanidad y Servicios Sociales, ofrece una variedad de servicios destinados a mejorar la calidad de vida y fomentar la autonomía, la participación social y el bienestar de la población mayor de Ceuta."
+  image="4fff60bebffc48b197493f571accef49.jpg"
+  imageAlt="Fachada del Centro del Mayor en la calle General Aranda"
+  crumbs={[{ label: 'Centro del Mayor' }]}
+  ctaTitle="Ven a conocernos o llámanos"
+  ctaText="El equipo del Centro del Mayor y las Unidades de Trabajo Social te informan sobre todos los servicios para personas mayores y te ayudan con las solicitudes."
+  schema={schema}
+>
+  <div slot="hero" class="cm-info" data-reveal>
+    <p><Icon name="pin" size={18} /> {MAYOR.address}</p>
+    <p><Icon name="clock" size={18} /> {MAYOR.hours}</p>
+    <p class="cm-tels"><Icon name="phone" size={18} /> {MAYOR.phones.map((p, i) => <>{i > 0 && ' · '}<a href={tel(p)}>{p}</a></>)}</p>
+  </div>
+
+  <section class="section section--white">
+    <div class="wrap">
+      <span class="kicker" data-reveal>Servicios</span>
+      <h2 data-split>Todo lo que el Centro del Mayor hace por ti</h2>
+      <ul class="svc" data-stagger>
+        {MAYOR_SERVICES.map((s, i) => (
+          <li class={`svc__item ${i === 0 || i === MAYOR_SERVICES.length - 1 ? 'svc__item--wide' : ''}`}>
+            <a href={s.href}>
+              <div class="svc__img"><Pic src={s.img} alt={s.alt} sizes="(min-width: 1080px) 33vw, (min-width: 720px) 50vw, 100vw" widths={[480, 768, 1080]} /></div>
+              <div class="svc__body">
+                <h3>{s.title}</h3>
+                <p>{s.text}</p>
+                <span class="link-arrow">Más información <Icon name="arrow" /></span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Page>
+
+<style>
+  .cm-info { display: grid; gap: 0.4rem; margin-top: 1.6rem; padding: 1.2rem 1.4rem; background: #fff; border-radius: 16px; border: 1px solid var(--linea); max-width: 520px; }
+  .cm-info p { display: flex; gap: 0.6rem; align-items: flex-start; margin: 0; font-size: var(--fs-small); }
+  .cm-info :global(svg) { flex: none; color: var(--coral); margin-top: 0.2em; }
+  .cm-tels a { font-weight: 700; text-decoration: none; }
+  .svc { list-style: none; margin: 2.2rem 0 0; padding: 0; display: grid; gap: var(--gap); grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .svc { grid-template-columns: repeat(2, 1fr); } }
+  .svc__item a { display: flex; flex-direction: column; height: 100%; background: var(--crema); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: var(--tinta); border: 1px solid var(--linea); transition: box-shadow 0.4s, transform 0.4s var(--ease); }
+  .svc__item a:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
+  .svc__img { aspect-ratio: 16 / 10; overflow: hidden; background: #fff; }
+  .svc__img :global(picture), .svc__img :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+  .svc__item a:hover .svc__img :global(img) { transform: scale(1.05); }
+  .svc__body { display: flex; flex-direction: column; gap: 0.5rem; padding: 1.5rem 1.6rem 1.7rem; flex: 1; }
+  .svc__body h3 { font-size: clamp(1.2rem, 1.45vw, 1.45rem); margin: 0; }
+  .svc__body p { font-size: var(--fs-small); color: var(--tinta-2); margin: 0 0 0.6rem; }
+  .svc__body .link-arrow { margin-top: auto; }
+  @media (min-width: 1080px) { .svc { grid-template-columns: repeat(3, 1fr); } .svc__item--wide { grid-column: span 2; } .svc__item--wide a { flex-direction: row; } .svc__item--wide .svc__img { aspect-ratio: auto; flex: 1.1; min-height: 340px; } .svc__item--wide .svc__body { flex: 1; justify-content: center; } }
+</style>

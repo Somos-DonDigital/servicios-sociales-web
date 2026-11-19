@@ -1,0 +1,65 @@
+---
+import Pic from './Pic.astro';
+interface Crumb { label: string; href?: string }
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  image?: string;
+  imageAlt?: string;
+  crumbs?: Crumb[];
+  portrait?: boolean;
+  contain?: boolean;
+}
+const { eyebrow, title, lead, image, imageAlt = '', crumbs = [], portrait, contain } = Astro.props;
+---
+<section class={`ph ${image ? '' : 'ph--noimg'}`}>
+  <div class="wrap ph__in">
+    <div class="ph__txt">
+      {crumbs.length > 0 && (
+        <nav class="crumbs" aria-label="Ruta de navegación">
+          <ol>
+            <li><a href="/">Inicio</a></li>
+            {crumbs.map((c) => <li>{c.href ? <a href={c.href}>{c.label}</a> : <span aria-current="page">{c.label}</span>}</li>)}
+          </ol>
+        </nav>
+      )}
+      {eyebrow && <p class="eyebrow" data-reveal>{eyebrow}</p>}
+      <h1 data-split>{title}</h1>
+      {lead && <p class="lead" data-reveal>{lead}</p>}
+      <slot />
+    </div>
+    {image && (
+      <div class={`ph__media ${portrait ? 'is-portrait' : ''} ${contain ? 'is-contain' : ''}`} data-reveal-img>
+        <div class="ph__frame" data-parallax>
+          <Pic src={image} alt={imageAlt} priority sizes="(min-width: 960px) 45vw, 100vw" />
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .ph { position: relative; padding-block: max(2rem, 3.5vw) max(3.5rem, 6vw); overflow: hidden; }
+  .ph::before {
+    content: ''; position: absolute; z-index: -1; width: 70vw; aspect-ratio: 1; left: -30vw; top: -40vw; border-radius: 50%;
+    background: radial-gradient(circle, var(--azul-100), transparent 68%);
+  }
+  .ph__in { display: grid; gap: max(2rem, 4vw); align-items: center; grid-template-columns: 1fr; }
+  @media (min-width: 960px) { .ph__in { grid-template-columns: 1.1fr 0.9fr; } .ph--noimg .ph__in { grid-template-columns: 1fr; } }
+  .ph--noimg .ph__txt { max-width: 900px; }
+  .ph h1 { margin-bottom: 0.4em; }
+  .ph .lead { max-width: 60ch; }
+  .crumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4em; margin: 0 0 1.6rem; padding: 0; font-size: var(--fs-small); color: var(--gris); }
+  .crumbs li + li::before { content: '/'; margin-right: 0.4em; opacity: 0.5; }
+  .crumbs a { color: var(--gris); text-decoration: none; }
+  .crumbs a:hover { color: var(--azul-700); text-decoration: underline; }
+  .ph__media { position: relative; border-radius: calc(var(--radius) * 1.4); overflow: hidden; aspect-ratio: 4 / 3.2; box-shadow: var(--shadow); background: var(--azul-100); }
+  .ph__media.is-portrait { aspect-ratio: 4 / 4.4; }
+  .ph__frame { position: absolute; inset: -8% 0; }
+  .ph__frame :global(img), .ph__frame :global(picture) { width: 100%; height: 100%; object-fit: cover; }
+  .ph__media.is-contain { background: #fff; }
+  .ph__media.is-contain .ph__frame { inset: 6%; }
+  .ph__media.is-contain :global(img) { object-fit: contain; }
+  .ph__media::after { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px rgba(13,27,54,.06); pointer-events: none; }
+</style>

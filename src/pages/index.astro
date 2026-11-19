@@ -1,0 +1,271 @@
+---
+import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
+import Icon from '../components/Icon.astro';
+import PostCard from '../components/PostCard.astro';
+import { OFFICES, tel } from '../data/site';
+import { posts } from '../lib/posts';
+
+const quick = [
+  { icon: 'info', label: 'Información y ayudas', text: 'SIVO', href: '/sivo' },
+  { icon: 'coin', label: 'Ingreso mínimo', text: 'IMIS', href: '/imis' },
+  { icon: 'elder', label: 'Personas mayores', text: 'Centro del Mayor', href: '/centrodelmayor' },
+  { icon: 'family', label: 'Familias', text: 'Familia numerosa', href: '/familianumerosa' },
+  { icon: 'home', label: 'Vivienda', text: 'Alojamiento alternativo', href: '/alojamientoalternativo' },
+  { icon: 'doc', label: 'Trámites', text: 'Solicitudes online', href: '/solicitudes' },
+];
+
+const funciones = [
+  'Recibir todas las demandas directas de la población, así como las remitidas por otras entidades.',
+  'Informar, orientar y asesorar sobre prestaciones y recursos sociales de la propia administración, así como de otras administraciones públicas y ONG.',
+  'Valoración de las situaciones sociofamiliares para elaborar el diagnóstico de cada caso y posterior proyecto de intervención.',
+  'Canalizar la demanda a los programas del Centro de Servicios Sociales.',
+  'Gestión de las prestaciones y ayudas económicas a las que pudiera tener derecho.',
+  'Apoyar a las personas en las tramitaciones generales que precisen en relación con necesidades sociales que no sean competencia de los SS. SS.',
+  'Derivar a otros recursos del Sistema de Protección Social en el caso de que proceda.',
+  'Detección y estudio de las necesidades sociales, con el objeto de generar recursos.',
+  'Capacitar y potenciar a las personas en habilidades sociales para facilitar su acceso al mercado laboral y otros sistemas de Protección Social.',
+  'Realizar acciones de coordinación con otras instituciones tales como educación, justicia, empleo, sanidad…',
+];
+
+const areas = [
+  { tag: 'Programas', title: 'Programas sociales', text: 'SIVO, IMIS, alojamiento alternativo, apoyo a familias, inclusión social y convenios con el Estado.', href: '/sivo', img: '8e143b26640545cb883386f42f6e2275.jpg', links: [['SIVO', '/sivo'], ['IMIS', '/imis'], ['Alojamiento alternativo', '/alojamientoalternativo'], ['Familias', '/familias'], ['Inclusión social', '/inclusionsocial'], ['Otros programas', '/otrosprogramas']] },
+  { tag: 'Servicios', title: 'Servicios y títulos', text: 'Familia numerosa, registro de parejas de hecho y tarjetas de estacionamiento para personas con discapacidad.', href: '/familianumerosa', img: '8f91b428f686444daeb54d9eb2059add.jpg', links: [['Familia numerosa', '/familianumerosa'], ['Parejas de hecho', '/parejasdehecho'], ['Tarjetas de discapacidad', '/tarjetasdiscapacidad']] },
+  { tag: 'Mayores', title: 'Centro del Mayor', text: 'Ayuda a domicilio, teleasistencia, residencias, centros de día, envejecimiento saludable y ayudas técnicas.', href: '/centrodelmayor', img: '50f547ba8b3e4a25b5b3a3537aa0f401.jpg', links: [['Ayuda a domicilio', '/ayudaadomicilio'], ['Teleasistencia', '/teleasistencia'], ['Residencias', '/residencias'], ['Envejecimiento saludable', '/envejecimientosaludable']] },
+  { tag: 'Entidades', title: 'Subvenciones', text: 'Convocatorias, convenios nominativos y subvenciones del 0,7 % del IRPF para entidades sociales de Ceuta.', href: '/subvenciones', img: '07d1be0d86694c9c9012ac41429014c3.jpg', links: [['Departamento de subvenciones', '/subvenciones']] },
+];
+
+const latest = posts.slice(0, 3);
+const officeImg = ['6524357bc2b94b63a8e5878672eca5ba.jpg', '3afdfb5aad174a088b7fb446222757cb.jpg', '225881b51a4e42d2ae02e4f1da2ead11.jpg'];
+---
+<Base
+  title="Servicios Sociales de Ceuta · Consejería de Sanidad y Servicios Sociales"
+  description="Servicios Sociales de la Ciudad Autónoma de Ceuta: Unidades de Trabajo Social, ayudas económicas, IMIS, Centro del Mayor, familias, subvenciones y trámites online."
+  schema={[{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'Servicios Sociales de Ceuta', url: 'https://www.servicios-sociales.es', inLanguage: 'es-ES', publisher: { '@id': 'https://www.servicios-sociales.es/#org' } }]}
+>
+  <!-- PORTADA -->
+  <section class="hero" data-hero>
+    <div class="hero__bg" data-hero-bg>
+      <Pic src="f719546c348942a4823560e9a3dc6329.jpg" alt="Vista panorámica de Ceuta al atardecer, con el monte Hacho y el mar" priority sizes="100vw" widths={[768, 1080, 1440, 2000]} />
+    </div>
+    <div class="hero__shade"></div>
+    <div class="wrap hero__in">
+      <p class="eyebrow hero__eyebrow" data-hero-in>Ciudad Autónoma de Ceuta</p>
+      <h1 class="hero__title" data-hero-in>Servicios Sociales<br /><em>cerca de ti</em></h1>
+      <p class="hero__lead" data-hero-in>Información, orientación, ayudas y acompañamiento para personas, familias y mayores de Ceuta. Planificamos, gestionamos y evaluamos los programas que dan respuesta a las necesidades sociales.</p>
+      <div class="btn-row" data-hero-in>
+        <a class="btn btn--coral" href="/solicitudes">Trámites online <Icon name="arrow" /></a>
+        <a class="btn btn--outline-light" href="#uts">Encuentra tu oficina <Icon name="pin" /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESOS RÁPIDOS -->
+  <section class="quick" aria-label="Accesos rápidos">
+    <div class="wrap">
+      <ul class="quick__grid" data-stagger>
+        {quick.map((q) => (
+          <li>
+            <a href={q.href}>
+              <span class="quick__ico"><Icon name={q.icon} /></span>
+              <span class="quick__txt"><span class="quick__label">{q.label}</span><span class="quick__name">{q.text}</span></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONÓCENOS -->
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow" data-reveal>Conócenos</p>
+        <h2 data-split>Servicios Sociales de la Ciudad Autónoma de Ceuta</h2>
+        <p class="lead" data-reveal>Primer referente del Sistema Público de Servicios Sociales para hacer operativa la política social de los órganos competentes de la Administración Pública.</p>
+        <p data-reveal>Planifica, gestiona y evalúa lo referente a los programas que se llevan a cabo, para responder a las necesidades sociales. Coordina los recursos propios, y los de los distintos sistemas de protección social, así como todas las actuaciones inherentes al propio Sistema Público de Servicios Sociales.</p>
+        <div class="btn-row" data-reveal>
+          <a class="btn" href="/nuestrocompromiso">Nuestro compromiso <Icon name="arrow" /></a>
+          <a class="link-arrow" href="/solicitudes">Ver todos los trámites <Icon name="arrow" /></a>
+        </div>
+        <dl class="facts" data-stagger>
+          <div><dt><span data-count="3">3</span></dt><dd>Unidades de Trabajo Social</dd></div>
+          <div><dt><span data-count="15">15</span></dt><dd>Trámites en la sede electrónica</dd></div>
+          <div><dt><span data-count="7">7</span></dt><dd>Servicios para personas mayores</dd></div>
+        </dl>
+      </div>
+      <div class="about__media" data-reveal-img>
+        <div class="about__frame" data-parallax>
+          <Pic src="63c68b1cc0854167bd0b0674c9095797.jpg" alt="Manos unidas alrededor del logotipo de Servicios Sociales de Ceuta" sizes="(min-width: 960px) 45vw, 100vw" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UTS -->
+  <section class="section section--white" id="uts">
+    <div class="wrap">
+      <div class="uts__head">
+        <div>
+          <p class="eyebrow" data-reveal>Atención cercana</p>
+          <h2 data-split>Unidades de Trabajo Social (UTS)</h2>
+        </div>
+        <p class="lead" data-reveal>Las Unidades de Trabajo Social son la estructura básica del Centro de Servicios Sociales y garantizan el acceso a las prestaciones básicas. Se ubican en el territorio más cercano al ciudadano, en una zona geográfica determinada.</p>
+      </div>
+
+      <ul class="offices" data-stagger>
+        {OFFICES.map((o, i) => (
+          <li class="office">
+            <div class="office__media">
+              <Pic src={officeImg[i]} alt={o.imageAlt} sizes="(min-width: 1080px) 30vw, (min-width: 768px) 50vw, 100vw" widths={[480, 768, 1080]} />
+            </div>
+            <div class="office__body">
+              <h3>{o.name}</h3>
+              <p class="office__row"><Icon name="pin" size={20} /><span>{o.address}<br /><span class="muted">{o.area}</span></span></p>
+              <p class="office__row"><Icon name="clock" size={20} /><span>{o.hours}</span></p>
+              <div class="office__phones">
+                {o.phones.map((p) => <a class="office__tel" href={tel(p)}><Icon name="phone" size={16} /> {p}</a>)}
+              </div>
+              <a class="link-arrow" href={o.maps} target="_blank" rel="noopener">Cómo llegar <Icon name="arrow" /></a>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div class="funcs">
+        <div class="funcs__intro" data-reveal>
+          <h3>¿Qué hacemos en las UTS?</h3>
+          <p>Distribuidas por zonas con la finalidad de acercar los servicios sociales a los ciudadanos dentro del territorio. Es el nivel más cercano de la población en los distintos ámbitos: individual, familiar y social.</p>
+        </div>
+        <ul class="checklist checklist--2" data-stagger>
+          {funciones.map((f) => <li>{f}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÁREAS -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow" data-reveal>Qué ofrecemos</p>
+        <h2 data-split>Programas, servicios y recursos</h2>
+      </div>
+      <ul class="areas" data-stagger>
+        {areas.map((a) => (
+          <li class="area">
+            <a class="area__img" href={a.href} tabindex="-1" aria-hidden="true">
+              <Pic src={a.img} alt="" sizes="(min-width: 1080px) 25vw, (min-width: 768px) 50vw, 100vw" widths={[480, 768, 1080]} />
+            </a>
+            <div class="area__body">
+              <span class="tag">{a.tag}</span>
+              <h3><a href={a.href}>{a.title}</a></h3>
+              <p>{a.text}</p>
+              <ul class="area__links">
+                {a.links.map(([l, h]) => <li><a href={h}>{l}</a></li>)}
+              </ul>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- NOTICIAS -->
+  <section class="section section--azul">
+    <div class="wrap">
+      <div class="sec-head sec-head--row">
+        <div>
+          <p class="eyebrow" data-reveal>Actualidad</p>
+          <h2 data-split>Información y últimas noticias</h2>
+        </div>
+        <a class="btn btn--ghost" href="/prensa" data-reveal>Todas las noticias <Icon name="arrow" /></a>
+      </div>
+      <ul class="grid-3 news" data-stagger>
+        {latest.map((p) => <li><PostCard post={p} /></li>)}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Portada */
+  .hero { position: relative; min-height: min(92vh, 900px); display: flex; align-items: flex-end; overflow: hidden; color: #fff; isolation: isolate; }
+  .hero__bg { position: absolute; inset: -6% 0 0; z-index: -2; }
+  .hero__bg :global(picture), .hero__bg :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: center 62%; }
+  .hero__shade { position: absolute; inset: 0; z-index: -1; background:
+      linear-gradient(180deg, rgba(13,27,54,.55) 0%, rgba(13,27,54,.05) 35%, rgba(13,27,54,.55) 70%, rgba(13,27,54,.88) 100%),
+      linear-gradient(90deg, rgba(13,27,54,.55), transparent 65%); }
+  .hero__in { padding-block: 8rem max(8rem, 11vw); }
+  .hero__eyebrow { color: #dfe8f6; }
+  .hero__title { font-size: var(--fs-hero); color: #fff; max-width: 13ch; line-height: 1; margin-bottom: 0.35em; }
+  .hero__title em { font-style: italic; font-weight: 400; color: #c9d8f0; }
+  .hero__lead { font-size: var(--fs-lead); max-width: 54ch; color: #e8eff9; margin-bottom: 2rem; }
+
+  /* Accesos rápidos */
+  .quick { position: relative; z-index: 3; margin-top: calc(max(4.5rem, 6vw) * -1); }
+  .quick__grid { list-style: none; margin: 0; padding: 0.6rem; display: grid; gap: 0.4rem; grid-template-columns: repeat(2, 1fr); background: #fff; border-radius: calc(var(--radius) * 1.2); box-shadow: var(--shadow); }
+  @media (min-width: 760px) { .quick__grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 1200px) { .quick__grid { grid-template-columns: repeat(6, 1fr); } }
+  .quick__grid a { display: flex; align-items: center; gap: 0.85rem; padding: 1rem; border-radius: 14px; text-decoration: none; color: var(--tinta); height: 100%; transition: background 0.3s; }
+  .quick__grid a:hover { background: var(--azul-50); }
+  .quick__ico { flex: none; width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--azul-100); color: var(--azul-700); transition: background 0.3s, color 0.3s, transform 0.4s var(--ease); }
+  .quick__grid a:hover .quick__ico { background: var(--coral); color: #fff; transform: rotate(-6deg) scale(1.05); }
+  .quick__txt { display: grid; line-height: 1.25; }
+  .quick__label { font-size: 0.8rem; color: var(--gris); font-weight: 600; }
+  .quick__name { font-weight: 700; color: var(--azul-900); font-size: clamp(0.95rem, 1vw, 1.05rem); }
+  @media (max-width: 520px) { .quick__grid a { padding: 0.8rem 0.6rem; gap: 0.6rem; } .quick__ico { width: 40px; height: 40px; border-radius: 12px; } .quick__name { font-size: 0.9rem; hyphens: auto; } .hero__in { padding-top: 5rem; } }
+
+  /* Conócenos */
+  .about__media { position: relative; aspect-ratio: 4 / 4.2; border-radius: calc(var(--radius) * 1.6); overflow: hidden; box-shadow: var(--shadow); }
+  .about__frame { position: absolute; inset: -8% 0; }
+  .about__frame :global(picture), .about__frame :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2.6rem 0 0; padding-top: 2rem; border-top: 1px solid var(--linea); }
+  .facts dt { font: 500 clamp(2.4rem, 4vw, 3.6rem)/1 var(--font-display); color: var(--azul-700); }
+  .facts dd { margin: 0.4rem 0 0; font-size: var(--fs-small); color: var(--tinta-2); line-height: 1.35; }
+
+  /* UTS */
+  .uts__head { display: grid; gap: 1rem 4vw; margin-bottom: max(2.5rem, 4vw); }
+  @media (min-width: 960px) { .uts__head { grid-template-columns: 1fr 1fr; align-items: end; } .uts__head .lead { margin-bottom: 0.4rem; } }
+  .offices { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--gap); grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .offices { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1080px) { .offices { grid-template-columns: repeat(3, 1fr); } }
+  .office { background: var(--crema); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; border: 1px solid var(--linea); }
+  .office__media { aspect-ratio: 16 / 10; overflow: hidden; }
+  .office__media :global(picture), .office__media :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+  .office:hover .office__media :global(img) { transform: scale(1.04); }
+  .office__body { padding: 1.5rem 1.6rem 1.7rem; display: flex; flex-direction: column; gap: 0.2rem; flex: 1; }
+  .office__body h3 { margin-bottom: 0.7rem; }
+  .office__row { display: flex; gap: 0.7rem; margin: 0 0 0.7rem; font-size: var(--fs-small); line-height: 1.45; }
+  .office__row :global(svg) { flex: none; color: var(--coral); margin-top: 0.1em; }
+  .office__phones { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0.3rem 0 1.2rem; }
+  .office__tel { display: inline-flex; align-items: center; gap: 0.4em; padding: 0.5em 0.85em; border-radius: 999px; background: #fff; border: 1px solid var(--linea); font-weight: 700; font-size: 0.95rem; text-decoration: none; color: var(--azul-900); transition: background 0.25s, color 0.25s, border-color 0.25s; }
+  .office__tel:hover { background: var(--azul-700); color: #fff; border-color: var(--azul-700); }
+  .office .link-arrow { margin-top: auto; }
+  .funcs { display: grid; gap: 2rem 5vw; margin-top: max(3.5rem, 6vw); padding-top: max(3rem, 4.5vw); border-top: 1px solid var(--linea); }
+  @media (min-width: 1000px) { .funcs { grid-template-columns: 0.75fr 2fr; } }
+
+  /* Áreas */
+  .sec-head { margin-bottom: max(2.2rem, 3.5vw); max-width: 820px; }
+  .sec-head--row { max-width: none; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 1.5rem; }
+  .sec-head--row h2 { margin-bottom: 0; }
+  .areas { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--gap); grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .areas { grid-template-columns: repeat(2, 1fr); } }
+  .area { display: grid; grid-template-columns: 1fr; background: #fff; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--linea); transition: box-shadow 0.4s; }
+  .area:hover { box-shadow: var(--shadow); }
+  @media (min-width: 1200px) { .area { grid-template-columns: 0.85fr 1fr; } }
+  .area__img { display: block; aspect-ratio: 16 / 10; overflow: hidden; }
+  @media (min-width: 1200px) { .area__img { aspect-ratio: auto; } }
+  .area__img :global(picture), .area__img :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+  .area:hover .area__img :global(img) { transform: scale(1.05); }
+  .area__body { padding: 1.6rem 1.7rem 1.8rem; }
+  .area__body h3 { margin: 0.8rem 0 0.5rem; }
+  .area__body h3 a { color: inherit; text-decoration: none; }
+  .area__body h3 a:hover { color: var(--azul-700); }
+  .area__body p { font-size: var(--fs-small); color: var(--tinta-2); }
+  .area__links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .area__links a { display: inline-block; padding: 0.4em 0.8em; border-radius: 999px; background: var(--azul-50); color: var(--azul-800); font-size: 0.88rem; font-weight: 600; text-decoration: none; transition: background 0.25s, color 0.25s; }
+  .area__links a:hover { background: var(--azul-700); color: #fff; }
+
+  .news { list-style: none; margin: 0; padding: 0; }
+</style>

@@ -1,0 +1,49 @@
+---
+import Icon from './Icon.astro';
+import { OFFICES, tel, SITE } from '../data/site';
+interface Item { label: string; href: string }
+interface Props { title?: string; items?: Item[]; contact?: { name: string; address: string; phones: string[]; hours: string } }
+const { title = 'Solicitudes', items = [], contact } = Astro.props;
+---
+<aside class="cgrid__aside" data-reveal>
+  {items.length > 0 && (
+    <div class="aside-card aside-card--light">
+      <h2>{title}</h2>
+      <ul class="al">
+        {items.map((i) => (
+          <li><a href={i.href} target="_blank" rel="noopener"><Icon name={i.href.includes('sede.ceuta') ? 'doc' : 'external'} size={20} /><span>{i.label}</span></a></li>
+        ))}
+      </ul>
+    </div>
+  )}
+  <div class="aside-card">
+    {contact ? (
+      <>
+        <h2>{contact.name}</h2>
+        <p><Icon name="pin" size={16} /> {contact.address}</p>
+        <p><Icon name="clock" size={16} /> {contact.hours}</p>
+        {contact.phones.map((p, i) => <a class={`btn ${i === 0 ? 'btn--coral' : 'btn--outline-light'}`} href={tel(p)}><Icon name="phone" /> {p}</a>)}
+      </>
+    ) : (
+      <>
+        <h2>¿Tienes dudas?</h2>
+        <p>Tu Unidad de Trabajo Social te informa y orienta sobre esta prestación y te ayuda con la solicitud.</p>
+        <a class="btn btn--coral" href={tel(OFFICES[0].phones[0])}><Icon name="phone" /> UTS San José · {OFFICES[0].phones[0]}</a>
+        <a class="btn btn--outline-light" href={tel(OFFICES[2].phones[0])}><Icon name="phone" /> UTS Centro · {OFFICES[2].phones[0]}</a>
+        <a class="btn btn--outline-light" href={tel(OFFICES[1].phones[0])}><Icon name="phone" /> UTS Príncipe · {OFFICES[1].phones[0]}</a>
+      </>
+    )}
+    <p class="al__sede"><a href={SITE.sede} target="_blank" rel="noopener">Ir a la sede electrónica <Icon name="external" size={14} /></a></p>
+  </div>
+</aside>
+
+<style>
+  .al { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.2rem; }
+  .al a { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.7rem 0.6rem; margin: 0 -0.6rem; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.98rem; line-height: 1.35; color: var(--azul-900) !important; transition: background 0.25s; }
+  .al a:hover { background: var(--azul-50); }
+  .al :global(svg) { flex: none; color: var(--azul-700); margin-top: 0.05em; }
+  .aside-card p { display: flex; gap: 0.5em; align-items: flex-start; }
+  .aside-card p :global(svg) { flex: none; margin-top: 0.3em; color: var(--azul-400); }
+  .al__sede { margin: 1.2rem 0 0; font-size: 0.92rem; }
+  .al__sede a { display: inline-flex; align-items: center; gap: 0.4em; font-weight: 600; }
+</style>

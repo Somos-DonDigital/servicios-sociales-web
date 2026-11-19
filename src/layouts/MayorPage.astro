@@ -1,0 +1,81 @@
+---
+import Page from './Page.astro';
+import Icon from '../components/Icon.astro';
+import { MAYOR, MAYOR_SERVICES } from '../data/mayor';
+import { tel } from '../data/site';
+
+interface Props {
+  seoTitle: string;
+  description: string;
+  title: string;
+  lead: string;
+  image: string;
+  imageAlt: string;
+  crumb: string;
+  solicitud?: { label: string; href: string } | null;
+  portrait?: boolean;
+  contain?: boolean;
+}
+const p = Astro.props;
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/');
+---
+<Page
+  seoTitle={p.seoTitle}
+  description={p.description}
+  eyebrow="Centro del Mayor"
+  title={p.title}
+  lead={p.lead}
+  image={p.image}
+  imageAlt={p.imageAlt}
+  portrait={p.portrait}
+  contain={p.contain}
+  crumbs={[{ label: 'Centro del Mayor', href: '/centrodelmayor' }, { label: p.crumb }]}
+  ctaTitle="¿Quieres solicitar este servicio?"
+  ctaText="Te informamos en el Centro del Mayor y en tu Unidad de Trabajo Social. Llámanos o acércate en horario de atención."
+>
+  {p.solicitud && <a slot="hero" class="btn btn--coral" href={p.solicitud.href} target="_blank" rel="noopener" data-reveal>{p.solicitud.label} <Icon name="external" /></a>}
+  {p.solicitud === null && <p slot="hero" class="pending" data-reveal><Icon name="info" size={18} /> Solicitud online próximamente. Mientras tanto, infórmate en el Centro del Mayor.</p>}
+  <section class="section section--white">
+    <div class="wrap cgrid">
+      <div class="cgrid__main mp"><slot /></div>
+      <aside class="cgrid__aside" data-reveal>
+        {p.solicitud && (
+          <div class="aside-card aside-card--light">
+            <h2>Solicitud</h2>
+            <p>Consulta la documentación y presenta la solicitud en la sede electrónica de la Ciudad Autónoma de Ceuta.</p>
+            <a class="btn" href={p.solicitud.href} target="_blank" rel="noopener">{p.solicitud.label} <Icon name="external" /></a>
+          </div>
+        )}
+        <div class="aside-card">
+          <h2>{MAYOR.name}</h2>
+          <p><Icon name="pin" size={16} /> {MAYOR.address}</p>
+          <p><Icon name="clock" size={16} /> {MAYOR.hours}</p>
+          {MAYOR.phones.map((t, i) => <a class={`btn ${i === 0 ? 'btn--coral' : 'btn--outline-light'}`} href={tel(t)}><Icon name="phone" /> {t}</a>)}
+        </div>
+        <nav class="aside-card aside-card--light sib" aria-label="Otros servicios del Centro del Mayor">
+          <h2>Otros servicios</h2>
+          <ul>
+            {MAYOR_SERVICES.map((s) => (
+              <li><a href={s.href} aria-current={s.href === path ? 'page' : undefined}>{s.short}<Icon name="arrow" size={18} /></a></li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+    </div>
+  </section>
+</Page>
+
+<style>
+  .pending { display: inline-flex; gap: 0.5rem; align-items: center; padding: 0.8rem 1.1rem; background: var(--arena); border-radius: 12px; font-size: var(--fs-small); margin: 0; }
+  .pending :global(svg) { color: var(--coral); flex: none; }
+  .aside-card p { display: flex; gap: 0.5em; align-items: flex-start; }
+  .aside-card p :global(svg) { flex: none; margin-top: 0.3em; color: var(--azul-400); }
+  .sib ul { list-style: none; margin: 0; padding: 0; }
+  .sib a { display: flex; justify-content: space-between; align-items: center; padding: 0.65rem 0; border-bottom: 1px solid var(--linea); text-decoration: none; font-weight: 600; color: var(--azul-900) !important; }
+  .sib li:last-child a { border: 0; }
+  .sib a :global(svg) { color: var(--azul-400); transition: transform 0.3s var(--ease); }
+  .sib a:hover :global(svg) { transform: translateX(4px); color: var(--azul-700); }
+  .sib a[aria-current='page'] { color: var(--coral-700) !important; }
+  .mp :global(h2) { font-size: var(--fs-h2); }
+  .mp :global(h3) { margin-top: 0.2rem; }
+</style>

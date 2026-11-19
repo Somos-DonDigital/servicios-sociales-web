@@ -1,0 +1,34 @@
+---
+import MayorPage from '../layouts/MayorPage.astro';
+import Icon from '../components/Icon.astro';
+import { sede } from '../data/site';
+const prestaciones = [
+  { i: 'home', t: 'Atención doméstica o del hogar', l: ['Tareas del hogar', 'Comida elaborada'] },
+  { i: 'heart', t: 'Atención higiénico-sanitaria', l: ['Higiene personal', 'Peluquería', 'Apoyo / instrucción'] },
+  { i: 'users', t: 'Atención psicosocial', l: ['Enfermería', 'Acompañamiento', 'Apoyo psicosocial', 'Control y seguimiento'] },
+];
+---
+<MayorPage
+  seoTitle="Servicio de Ayuda a Domicilio (SAD)"
+  description="Servicio de Ayuda a Domicilio (SAD) en Ceuta para mayores de 65 años o con discapacidad del 33 %: tareas del hogar, higiene, apoyo psicosocial. Requisitos y solicitud."
+  title="Servicio de Ayuda a Domicilio (SAD)"
+  lead="Conjunto de actividades llevadas a cabo en el domicilio de las personas titulares, con el fin de atender sus necesidades de la vida diaria e incrementar su autonomía."
+  image="0325e517f6e341409f9299085c3cbae0.jpg"
+  imageAlt="Manos de una persona mayor sostenidas por las de su cuidadora"
+  crumb="Ayuda a domicilio"
+  solicitud={{ label: 'Solicitar ayuda a domicilio', href: sede('SSAAD') }}
+>
+  <h2 data-split>Requisitos</h2>
+  <ul class="checklist" data-stagger>
+    <li>Ser pensionista de jubilación o mayor de 65 años, o tener reconocido un grado de discapacidad igual o superior al 33 %.</li>
+    <li>Contar con residencia legal en la Ciudad Autónoma de Ceuta.</li>
+    <li>Hallarse ante una necesidad a la que no pueda hacer frente por sus propios medios y que pueda ser atendida con alguna de las actuaciones que constituyen el contenido de la Ayuda a Domicilio.</li>
+  </ul>
+  <h2 data-split style="margin-top:2.5rem">Prestaciones</h2>
+  <ul class="feats feats--3" data-stagger>
+    {prestaciones.map((p) => <li class="feat"><span class="feat__ico"><Icon name={p.i} /></span><h3>{p.t}</h3><ul class="checklist" style="margin:0.6rem 0 0;font-size:var(--fs-small)">{p.l.map((x) => <li>{x}</li>)}</ul></li>)}
+  </ul>
+  <h2 data-split style="margin-top:2.5rem">Documentación y solicitud</h2>
+  <p data-reveal>Accede al trámite de la sede electrónica para consultar la documentación necesaria y presentar la solicitud.</p>
+  <a class="btn" href={sede('SSAAD')} target="_blank" rel="noopener" data-reveal>Ver trámite en la sede electrónica <Icon name="external" /></a>
+</MayorPage>
