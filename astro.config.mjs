@@ -4,6 +4,8 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://www.servicios-sociales.es',
+  // En la vista previa de GitHub Pages se publica bajo /servicios-sociales-web
+  base: process.env.BASE_PATH || '/',
   trailingSlash: 'never',
   build: { format: 'file' },
   integrations: [
