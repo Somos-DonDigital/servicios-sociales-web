@@ -22,7 +22,7 @@ const logo = img('bd108c049a6a43688b30172abf3387aa.png');
 <header class="hdr" data-header>
   <div class="wrap hdr__in">
     <a class="hdr__logo" href="/" aria-label="Servicios Sociales · Ciudad Autónoma de Ceuta — Inicio">
-      <Image src={logo} alt="" widths={[240, 480]} sizes="220px" loading="eager" fetchpriority="high" />
+      <Image src={logo} alt="" widths={[260, 520]} sizes="130px" loading="eager" fetchpriority="high" />
     </a>
 
     <nav class="nav" aria-label="Principal">
@@ -104,7 +104,8 @@ const logo = img('bd108c049a6a43688b30172abf3387aa.png');
   .hdr__in { display: flex; align-items: center; gap: 1.5rem; height: var(--header-h); transition: height 0.35s var(--ease); }
   .hdr.is-scrolled .hdr__in { height: 70px; }
   .hdr__logo { flex: none; display: block; }
-  .hdr__logo :global(img) { width: clamp(150px, 13vw, 200px); height: auto; }
+  .hdr__logo :global(img) { height: clamp(48px, 4.6vw, 68px); width: auto; transition: height 0.35s var(--ease); }
+  .hdr.is-scrolled .hdr__logo :global(img) { height: clamp(44px, 3.8vw, 54px); }
 
   .nav { margin-left: auto; }
   .nav__list { display: flex; list-style: none; margin: 0; padding: 0; gap: 0.15rem; }
